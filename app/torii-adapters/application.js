@@ -35,7 +35,7 @@ export default Ember.Object.extend({
     localStorage.removeItem('token', null);
     return new Ember.RSVP.Promise(function(resolve, reject) {
       Ember.$.ajax({
-        url: '//localhost:3000/logout',
+        url: '//api.tweetify.io/logout',
         type: 'POST',
         success: Ember.run.bind(null, resolve),
         error: Ember.run.bind(null, reject)

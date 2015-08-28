@@ -10,7 +10,7 @@ module.exports = function(environment) {
       sessionServiceName: 'session',
       providers: {
         'twitter': {
-          requestTokenUri: 'http://localhost:3000/auth/twitter'
+          requestTokenUri: '//api.tweetify.io/auth/twitter'
         }
       }
     },

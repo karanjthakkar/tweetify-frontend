@@ -1,7 +1,7 @@
 import DS from 'ember-data';
 
 export default DS.RESTAdapter.extend({
-  host: '//localhost:3000',
+  host: '//api.tweetify.io',
   ajax(url, method, hash) {
     hash = hash || {};
     hash.crossDomain = true;
