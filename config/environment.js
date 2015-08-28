@@ -2,7 +2,7 @@
 
 module.exports = function(environment) {
   var ENV = {
-    modulePrefix: 'tweetlyapp-frontend',
+    modulePrefix: 'tweetify',
     environment: environment,
     baseURL: '/',
     locationType: 'auto',

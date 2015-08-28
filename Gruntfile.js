@@ -31,6 +31,19 @@ module.exports = function(grunt) {
           {expand: true, cwd: 'dist/assets/', src:['**'], dest: 'assets/', params: {CacheControl: '2000'}},
           {expand: true, cwd: 'dist/images/', src:['**'], dest: 'images/', params: {CacheControl: '2000'}}
         ]
+      },
+      staging: {
+        options: {
+          bucket: 'staging.tweetify.io',
+          params: {
+            ContentEncoding: 'gzip' // applies to all the files!
+          }
+        },
+        files: [
+          {expand: true, cwd: 'dist/', src: ['**'], dest: '', params: {CacheControl: '60'}},
+          {expand: true, cwd: 'dist/assets/', src:['**'], dest: 'assets/', params: {CacheControl: '2000'}},
+          {expand: true, cwd: 'dist/images/', src:['**'], dest: 'images/', params: {CacheControl: '2000'}}
+        ]
       }
     },
     exec: {
@@ -39,6 +52,9 @@ module.exports = function(grunt) {
       },
       ember_build_production: {
         command: 'ember build --environment=production'
+      },
+      ember_build_staging: {
+        command: 'ember build --environment=staging'
       },
       ember_server: {
         command: 'ember server'
@@ -57,5 +73,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-aws-s3');
   grunt.loadNpmTasks('grunt-contrib-compress');
   grunt.loadNpmTasks('grunt-exec');
-  grunt.registerTask('deploy', ['exec:ember_build_production', 'compress', 'exec:move_assets', 'exec:delete_tmp_dist', 'aws_s3:production', 'slack:slack_production']);
+  grunt.registerTask('deploy', ['exec:ember_build_production', 'compress', 'exec:move_assets', 'exec:delete_tmp_dist', 'aws_s3:production']);
+  grunt.registerTask('deploy-staging', ['exec:ember_build_staging', 'compress', 'exec:move_assets', 'exec:delete_tmp_dist', 'aws_s3:staging']);
 };

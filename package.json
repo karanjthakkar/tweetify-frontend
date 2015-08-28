@@ -1,7 +1,7 @@
 {
-  "name": "tweetlyapp-frontend",
+  "name": "Tweetify",
   "version": "0.0.0",
-  "description": "Small description for tweetlyapp-frontend goes here",
+  "description": "Small description for tweetify goes here",
   "private": true,
   "directories": {
     "doc": "doc",
@@ -36,6 +36,11 @@
     "ember-data": "1.13.8",
     "ember-disable-proxy-controllers": "^1.0.0",
     "ember-export-application-global": "^1.0.3",
-    "torii": "^0.5.1"
+    "torii": "^0.5.1",
+    "grunt": "^0.4.5",
+    "grunt-aws-s3": "^0.12.1",
+    "grunt-cli": "^0.1.13",
+    "grunt-contrib-compress": "^0.13.0",
+    "grunt-exec": "^0.4.6"
   }
 }
