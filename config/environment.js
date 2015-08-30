@@ -43,6 +43,8 @@ module.exports = function(environment) {
     // ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
+    ENV.apiDomain = '//local.tweetify.io:3000';
+    ENV.torii.providers['twitter'].requestTokenUri = '//local.tweetify.io:3000/auth/twitter';
   }
 
   if (environment === 'test') {
@@ -57,8 +59,10 @@ module.exports = function(environment) {
     ENV.APP.rootElement = '#ember-testing';
   }
 
-  if (environment === 'production') {
-
+  if (environment === 'production' || environment === 'staging') {
+    ENV.apiDomain = '//api.tweetify.io';
+    ENV.torii.providers['twitter'].requestTokenUri = '//api.tweetify.io/auth/twitter';
+    ENV.locationType = 'hash';
   }
 
   return ENV;

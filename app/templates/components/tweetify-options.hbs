@@ -1,0 +1,22 @@
+{{input
+  class='js-option-value'
+  type='text'
+  value=value
+  key-down='removeSpace'
+  key-up='checkValidity'
+  disabled=isAdding
+}}
+{{#each optionValueList as |optionValue|}}
+  {{#if (is-eq optionType 'USERS')}}
+    {{optionValue.username}} - {{optionValue.name}}
+  {{else}}
+    {{optionValue.keyword}}
+  {{/if}}
+{{else}}
+  {{#if (is-eq optionType 'USERS')}}
+    Add a minimum of {{optionValueMinLimit}} users for finding best content
+  {{else}}
+    Add a minimum of {{optionValueMinLimit}} keywords sharing relevant content
+  {{/if}}
+{{/each}}
+<button {{action 'submitFavList'}}>Submit</button>

@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import Base from 'tweetify/routes/base';
 
-export default Ember.Route.extend({
+export default Base.extend({
 });

@@ -7,12 +7,16 @@ var rejectPromise = function() {
 };
 
 export default Ember.Object.extend({
+
+  user: Ember.inject.service(),
+
   open: function(auth) {
     if (!auth.code) {
       return rejectPromise();
     }
     localStorage.setItem('token', auth.code);
-    return this.get('store').find('user', localStorage.getItem('token')).then(function(user) {
+    return this.get('store').find('user', localStorage.getItem('token')).then((user) => {
+      this.get('user').setUser(user);
       return {
         currentUser: user
       };
@@ -24,7 +28,8 @@ export default Ember.Object.extend({
     if (!token) {
       return rejectPromise();
     }
-    return this.get('store').find('user', token).then(function(user) {
+    return this.get('store').find('user', token).then((user) => {
+      this.get('user').setUser(user);
       return {
         currentUser: user
       };
@@ -33,13 +38,6 @@ export default Ember.Object.extend({
 
   close: function() {
     localStorage.removeItem('token', null);
-    return new Ember.RSVP.Promise(function(resolve, reject) {
-      Ember.$.ajax({
-        url: '//api.tweetify.io/logout',
-        type: 'POST',
-        success: Ember.run.bind(null, resolve),
-        error: Ember.run.bind(null, reject)
-      });
-    });
+    return this.get('user').logout();
   }
 });

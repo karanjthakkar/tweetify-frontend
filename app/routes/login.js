@@ -1,16 +1,19 @@
 import Ember from 'ember';
+import Base from 'tweetify/routes/base';
 
-export default Ember.Route.extend({
+export default Base.extend({
   actions: {
     signInViaTwitter: function() {
-      var route = this;
-
-      this.get('session').open('twitter').then(function() {
-        route.transitionTo('app.profile');
-      }, function() {
-        console.log('auth failed');
-        console.log(route.get('session'));
-      });
+      if (this.get('session.isAuthenticated')) {
+        this.transitionTo('app.profile');
+        return; // Already authenticated
+      } else {
+        this.get('session').open('twitter').then(() => {
+          this.transitionTo('app.profile');
+        }, () => {
+          this.transitionTo('login');
+        });
+      }
     }
   }
 });
