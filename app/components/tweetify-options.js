@@ -42,7 +42,7 @@ export default Ember.Component.extend({
         saveOption = Em.String.capitalize(lowerCaseOption);
 
       this.get('user')[`saveFav${saveOption}`](this.get('optionValueList')).then(() => {
-        if (redirect) {
+        if (this.get('redirect')) {
           this.get('eventBus').publish(`onboardComplete:fav_${lowerCaseOption}`);
         }
       }, () => {
