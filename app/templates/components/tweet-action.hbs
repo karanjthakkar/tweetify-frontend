@@ -1,0 +1,7 @@
+{{#each actionTypes as |actionType|}}
+  <button {{action 'setTweetAction' actionType.type}}>{{actionType.labelText}}</button>
+  {{#if (is-eq currentAction actionType.type)}}
+    Selected
+  {{/if}}
+{{/each}}
+<button {{action 'saveTweetAction'}}>Submit</button>
