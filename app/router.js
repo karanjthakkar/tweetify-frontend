@@ -20,11 +20,13 @@ Router.map(function() {
     this.route('profile', {
       path: 'profile'
     });
+    this.route('settings');
   });
   this.route('notFound', {
     path: '/*path'
   });
   this.route('base');
+  this.route('logout');
 });
 
 export default Router;

@@ -31,11 +31,12 @@ export default Ember.Service.extend({
     return ajax({
       url: config.apiDomain + '/fav_users',
       type: 'POST',
-      data: {
+      contentType: 'application/json; charset=utf-8',
+      data: JSON.stringify({
         fav_users: users.map(function(user) {
           return user.username
         })
-      }
+      })
     });
   },
 
@@ -47,11 +48,27 @@ export default Ember.Service.extend({
     return ajax({
       url: config.apiDomain + '/fav_keywords',
       type: 'POST',
-      data: {
+      contentType: 'application/json; charset=utf-8',
+      data: JSON.stringify({
         fav_keywords: keywords.map(function(keyword) {
           return keyword.keyword;
         })
-      }
+      })
+    });
+  },
+
+  saveTweetAction(tweetAction) {
+    this.setProperties({
+      'data.tweet_action': tweetAction,
+      'data.onboard_tweet_action': true
+    });
+    return ajax({
+      url: config.apiDomain + '/tweet_action',
+      type: 'POST',
+      contentType: 'application/json; charset=utf-8',
+      data: JSON.stringify({
+        tweet_action: tweetAction
+      })
     });
   }
 });
