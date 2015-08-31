@@ -16,8 +16,12 @@ export default Ember.Component.extend({
   isAdding: false,
 
   setup: Ember.on('init', function() {
+
+    if (!this.get('optionValueList')) {
+      this.set('optionValueList', Ember.A([]));
+    }
+
     this.setProperties({
-      'optionValueList': Ember.A([]),
       'optionValueMinLimit': Constants[`MINIMUM_FAV_${this.get('optionType')}_${this.get('userType')}`],
       'optionValueMaxLimit': Constants[`MAXIMUM_FAV_${this.get('optionType')}_${this.get('userType')}`]
     });
@@ -96,6 +100,9 @@ export default Ember.Component.extend({
         event.preventDefault();
         return false;
       }
+    },
+    removeFavItem(value) {
+      this.get('optionValueList').removeObject(value);
     }
   }
 });
