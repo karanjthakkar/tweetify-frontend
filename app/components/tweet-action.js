@@ -6,6 +6,7 @@ export default Ember.Component.extend({
   eventBus: Ember.inject.service(),
 
   currentAction: null,
+  redirect: true,
 
   actionTypes: [{
     type: 'COPY',
@@ -18,13 +19,22 @@ export default Ember.Component.extend({
     labelText: 'Text Retweet'
   }],
 
+  setup: Ember.on('init', function() {
+    var initCurrentAction = this.get('initCurrentAction');
+    if (initCurrentAction) {
+      this.set('currentAction', initCurrentAction);
+    }
+  }),
+
   actions: {
     setTweetAction(actionType) {
       this.set('currentAction', actionType);
     },
     saveTweetAction() {
       this.get('user').saveTweetAction(this.get('currentAction')).then(() => {
-        this.get('eventBus').publish('onboardComplete:tweet_action');
+        if (this.get('redirect')) {
+          this.get('eventBus').publish('onboardComplete:tweet_action');
+        }
       }, () => {
         alert('error saving tweet action');
       });

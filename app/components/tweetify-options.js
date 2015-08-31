@@ -16,15 +16,20 @@ export default Ember.Component.extend({
   isAdding: false,
 
   setup: Ember.on('init', function() {
-
-    if (!this.get('optionValueList')) {
-      this.set('optionValueList', Ember.A([]));
-    }
+    var initOptionValueList = this.get('initOptionValueList');
 
     this.setProperties({
+      'optionValueList': Ember.A([]),
       'optionValueMinLimit': Constants[`MINIMUM_FAV_${this.get('optionType')}_${this.get('userType')}`],
       'optionValueMaxLimit': Constants[`MAXIMUM_FAV_${this.get('optionType')}_${this.get('userType')}`]
     });
+
+    if (initOptionValueList) {
+      let optionValueList = this.get('optionValueList');
+      initOptionValueList.forEach((item) => {
+        optionValueList.pushObject(item);
+      });
+    }
   }),
 
   sanitizeValue(value) {
@@ -70,6 +75,9 @@ export default Ember.Component.extend({
         if (this.get('optionType') === 'USERS') {
           this.get('user').checkUsernameValidity(value).then((response) => {
             this.get('optionValueList').pushObject(response.user);
+          }, () => {
+            alert('username not found');
+          }).finally(() => {
             this.setProperties({
               'value': '',
               'isAdding': false
@@ -77,8 +85,6 @@ export default Ember.Component.extend({
             Ember.run.later(() => {
               this.$('.js-option-value').focus();
             }, 1);
-          }, () => {
-            alert('username not found');
           });
         } else {
           this.get('optionValueList').pushObject({
