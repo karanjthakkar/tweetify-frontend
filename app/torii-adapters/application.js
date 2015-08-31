@@ -10,7 +10,7 @@ export default Ember.Object.extend({
 
   user: Ember.inject.service(),
 
-  open: function(auth) {
+  open(auth) {
     if (!auth.code) {
       return rejectPromise();
     }
@@ -23,7 +23,7 @@ export default Ember.Object.extend({
     });
   },
 
-  fetch: function() {
+  fetch() {
     var token = localStorage.getItem('token');
     if (!token) {
       return rejectPromise();
@@ -36,8 +36,5 @@ export default Ember.Object.extend({
     });
   },
 
-  close: function() {
-    localStorage.removeItem('token', null);
-    return this.get('user').logout();
-  }
+  close() {}
 });
