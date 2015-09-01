@@ -3,16 +3,20 @@ import config from 'tweetify/config/environment';
 import ajax from 'ic-ajax';
 
 export default Ember.Service.extend({
+
   data: null,
+
   setUser(user) {
     this.set('data', user);
   },
+
   logout() {
     return ajax({
       url: config.apiDomain + '/logout',
       type: 'POST'
     });
   },
+
   checkUsernameValidity(username) {
     return ajax({
       url: config.apiDomain + '/check_username',
@@ -69,6 +73,20 @@ export default Ember.Service.extend({
       data: JSON.stringify({
         tweet_action: tweetAction
       })
+    });
+  },
+
+  getScheduledTweets(id) {
+    return ajax({
+      url: `${config.apiDomain}/scheduled_tweets/${id}`,
+      type: 'GET'
+    });
+  },
+
+  getPostedTweets(id) {
+    return ajax({
+      url: `${config.apiDomain}/posted_tweets/${id}`,
+      type: 'GET'
     });
   }
 });

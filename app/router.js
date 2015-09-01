@@ -19,13 +19,15 @@ Router.map(function() {
     });
     this.route('profile', {
       path: 'profile'
+    }, function() {
+      this.route('posted');
+      this.route('scheduled');
     });
     this.route('settings');
   });
   this.route('notFound', {
     path: '/*path'
   });
-  this.route('base');
   this.route('logout');
 });
 

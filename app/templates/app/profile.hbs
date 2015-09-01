@@ -1,1 +1,19 @@
+{{#link-to 'app.profile'}}
+  Dashboard
+{{/link-to}}
+{{#link-to 'app.settings'}}
+  Settings
+{{/link-to}}
+{{#link-to 'app.profile.scheduled'}}
+  Scheduled
+{{/link-to}}
+{{#link-to 'app.profile.posted'}}
+  Posted
+{{/link-to}}
+{{#link-to 'logout'}}
+  Logout
+{{/link-to}}
+
 <p>currentUser: {{session.currentUser.username}}</p>
+
+{{outlet}}

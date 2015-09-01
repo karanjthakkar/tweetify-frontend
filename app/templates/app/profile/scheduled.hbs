@@ -1,0 +1,5 @@
+{{#each model as |scheduledTweet|}}
+  {{scheduledTweet.scheduled_text}}
+{{else}}
+  You have no scheduled tweets. Check back in an hour
+{{/each}}
