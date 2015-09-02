@@ -1,0 +1,13 @@
+{{#if isTweetActivityOn}}
+  Stop tweet monitoring
+{{else}}
+  Start tweet monitoring
+{{/if}}
+
+{{input
+  id=user.data.id
+  type='checkbox'
+  checked=isTweetActivityOn
+  disabled=isSaving
+}}
+<label for={{user.data.id}}></label>

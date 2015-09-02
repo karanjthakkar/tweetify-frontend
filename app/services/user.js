@@ -88,5 +88,17 @@ export default Ember.Service.extend({
       url: `${config.apiDomain}/posted_tweets/${id}`,
       type: 'GET'
     });
+  },
+
+  saveTweetActivity(isActivityOn) {
+    var activity = isActivityOn === true ? 'ON' : 'OFF';
+    return ajax({
+      url: config.apiDomain + '/activity',
+      type: 'POST',
+      contentType: 'application/json; charset=utf-8',
+      data: JSON.stringify({
+        activity: activity
+      })
+    });
   }
 });
