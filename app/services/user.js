@@ -38,7 +38,11 @@ export default Ember.Service.extend({
       contentType: 'application/json; charset=utf-8',
       data: JSON.stringify({
         fav_users: users.map(function(user) {
-          return user.username
+          return {
+            username: user.username,
+            name: user.name,
+            profile_image_url: user.profile_image_url
+          };
         })
       })
     });
@@ -55,7 +59,9 @@ export default Ember.Service.extend({
       contentType: 'application/json; charset=utf-8',
       data: JSON.stringify({
         fav_keywords: keywords.map(function(keyword) {
-          return keyword.keyword;
+          return {
+            keyword: keyword.keyword
+          };
         })
       })
     });

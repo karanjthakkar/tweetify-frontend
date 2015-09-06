@@ -8,6 +8,8 @@ export default Ember.Component.extend({
   currentAction: null,
   redirect: true,
 
+  isSaving: false,
+
   actionTypes: [{
     type: 'COPY',
     labelText: 'Same Content'
@@ -31,12 +33,21 @@ export default Ember.Component.extend({
       this.set('currentAction', actionType);
     },
     saveTweetAction() {
+
+      if (this.get('isSaving')) {
+        return;
+      }
+
+      this.set('isSaving', true);
+
       this.get('user').saveTweetAction(this.get('currentAction')).then(() => {
         if (this.get('redirect')) {
           this.get('eventBus').publish('onboardComplete:tweet_action');
         }
       }, () => {
         alert('error saving tweet action');
+      }).finally(() => {
+        this.set('isSaving', false);
       });
     }
   }

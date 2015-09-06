@@ -1,7 +1,9 @@
-{{#each actionTypes as |actionType|}}
-  <button {{action 'setTweetAction' actionType.type}}>{{actionType.labelText}}</button>
-  {{#if (is-eq currentAction actionType.type)}}
-    Selected
-  {{/if}}
-{{/each}}
-<button {{action 'saveTweetAction'}}>Submit</button>
+<div class="ui secondary menu">
+  {{#each actionTypes as |actionType|}}
+    <a class="item {{if (is-eq currentAction actionType.type) 'active'}}" {{action 'setTweetAction' actionType.type}}>{{actionType.labelText}}</a>
+  {{/each}}
+</div>
+<button class="ui small button positive {{if isSaving 'loading'}}" {{action 'saveTweetAction'}}>
+  <i class="icon save"></i>
+  Save
+</button>

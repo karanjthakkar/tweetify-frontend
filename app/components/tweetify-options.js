@@ -14,6 +14,7 @@ export default Ember.Component.extend({
   userType: Ember.computed.alias('user.data.user_type'),
 
   isAdding: false,
+  isSaving: false,
 
   setup: Ember.on('init', function() {
     var initOptionValueList = this.get('initOptionValueList');
@@ -47,8 +48,14 @@ export default Ember.Component.extend({
         return alert('Add more');
       }
 
+      if (this.get('isSaving')) {
+        return;
+      }
+
       var lowerCaseOption = this.get('optionType').toLowerCase(),
-        saveOption = Em.String.capitalize(lowerCaseOption);
+        saveOption = Ember.String.capitalize(lowerCaseOption);
+
+      this.set('isSaving', true);
 
       this.get('user')[`saveFav${saveOption}`](this.get('optionValueList')).then(() => {
         if (this.get('redirect')) {
@@ -56,6 +63,8 @@ export default Ember.Component.extend({
         }
       }, () => {
         alert('error saving fav');
+      }).finally(() => {
+        this.set('isSaving', false);
       });
 
     },
@@ -65,6 +74,10 @@ export default Ember.Component.extend({
       if (keyCode === 13) {
         if (this.get('optionValueList.length') === this.get('optionValueMaxLimit')) {
           return alert('Cannot add more');
+        }
+
+        if (this.get('isAdding')) {
+          return;
         }
 
         this.set('isAdding', true);

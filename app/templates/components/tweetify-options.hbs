@@ -1,18 +1,34 @@
-{{input
-  class='js-option-value'
-  type='text'
-  value=value
-  key-down='removeSpace'
-  key-up='checkValidity'
-  disabled=isAdding
-}}
-{{#each optionValueList as |optionValue|}}
+<div class="ui left icon input fluid {{if isAdding 'loading'}}">
+  {{input
+    class='js-option-value'
+    type='text'
+    value=value
+    placeholder='Enter you favorite username here'
+    key-down='removeSpace'
+    key-up='checkValidity'
+    disabled=isAdding
+  }}
   {{#if (is-eq optionType 'USERS')}}
-    <div>{{optionValue.username}} - {{optionValue.name}}</div>
-    <button {{action 'removeFavItem' optionValue}}>Remove</button>
+    <i class="users icon"></i>
   {{else}}
-    <div>{{optionValue.keyword}}</div>
-    <button {{action 'removeFavItem' optionValue}}>Remove</button>
+    <i class="tag icon"></i>
+  {{/if}}
+</div>
+{{#each optionValueList as |optionValue|}}
+
+  {{#if (is-eq optionType 'USERS')}}
+    <a class="ui medium label">
+      <img class="ui right spaced avatar image" src={{optionValue.profile_image_url}}>
+      {{optionValue.name}}
+      {{optionValue.username}}
+      <i class="delete icon" {{action 'removeFavItem' optionValue}}></i>
+    </a>
+  {{else}}
+    <a class="ui medium label">
+      <i class="star icon"></i>
+      {{optionValue.keyword}}
+      <i class="delete icon" {{action 'removeFavItem' optionValue}}></i>
+    </a>
   {{/if}}
 {{else}}
   {{#if (is-eq optionType 'USERS')}}
@@ -22,4 +38,11 @@
   {{/if}}
 {{/each}}
 <br>
-<button {{action 'submitFavList'}}>Submit</button>
+<button class="ui small button positive {{if isSaving 'loading'}}" {{action 'submitFavList'}}>
+  <i class="icon save"></i>
+  {{#if (is-eq optionType 'USERS')}}
+    Save Users
+  {{else}}
+    Save Keywords
+  {{/if}}
+</button>
