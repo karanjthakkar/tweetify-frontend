@@ -3,7 +3,7 @@
     class='js-option-value'
     type='text'
     value=value
-    placeholder='Enter you favorite username here'
+    placeholder=(if (is-eq optionType 'USERS') 'Enter you favorite users here' 'Enter you favorite keywords here')
     key-down='removeSpace'
     key-up='checkValidity'
     disabled=isAdding
