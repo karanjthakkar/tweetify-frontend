@@ -7,6 +7,7 @@ export default Ember.Component.extend({
 
   currentAction: null,
   redirect: true,
+  shouldSubmitAuto: false,
 
   isSaving: false,
 
@@ -31,10 +32,13 @@ export default Ember.Component.extend({
   actions: {
     setTweetAction(actionType) {
       this.set('currentAction', actionType);
+      if (this.get('shouldSubmitAuto')) {
+        this.send('saveTweetAction');
+      }
     },
     saveTweetAction() {
 
-      if (this.get('isSaving')) {
+      if (this.get('isSaving') && !this.get('shouldSubmitAuto')) {
         return;
       }
 

@@ -17,14 +17,13 @@
 {{#each optionValueList as |optionValue|}}
 
   {{#if (is-eq optionType 'USERS')}}
-    <a class="ui medium label">
+    <a class="ui small label">
       <img class="ui right spaced avatar image" src={{optionValue.profile_image_url}}>
-      {{optionValue.name}}
-      {{optionValue.username}}
+      @{{optionValue.username}}
       <i class="delete icon" {{action 'removeFavItem' optionValue}}></i>
     </a>
   {{else}}
-    <a class="ui medium label">
+    <a class="ui small label">
       <i class="star icon"></i>
       {{optionValue.keyword}}
       <i class="delete icon" {{action 'removeFavItem' optionValue}}></i>
@@ -38,11 +37,14 @@
   {{/if}}
 {{/each}}
 <br>
-<button class="ui small button positive {{if isSaving 'loading'}}" {{action 'submitFavList'}}>
-  <i class="icon save"></i>
-  {{#if (is-eq optionType 'USERS')}}
-    Save Users
-  {{else}}
-    Save Keywords
-  {{/if}}
-</button>
+
+{{#unless shouldSubmitAuto}}
+  <button class="ui small button positive {{if isSaving 'loading'}}" {{action 'submitFavList'}}>
+    <i class="icon save"></i>
+    {{#if (is-eq optionType 'USERS')}}
+      Save Users
+    {{else}}
+      Save Keywords
+    {{/if}}
+  </button>
+{{/unless}}

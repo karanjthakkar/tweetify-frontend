@@ -1,9 +1,18 @@
-<div class="ui secondary menu">
-  {{#each actionTypes as |actionType|}}
-    <a class="item {{if (is-eq currentAction actionType.type) 'active'}}" {{action 'setTweetAction' actionType.type}}>{{actionType.labelText}}</a>
-  {{/each}}
+<div class="ui form">
+  <div class="inline fields">
+    {{#each actionTypes as |actionType|}}
+      <div class="field">
+        <div class="ui radio checkbox">
+          {{radio-button checked=(mut currentAction) on-change=(action 'setTweetAction' actionType.type) value=actionType.type}}
+          <label>{{actionType.labelText}}</label>
+        </div>
+      </div>
+    {{/each}}
+  </div>
 </div>
+{{#unless shouldSubmitAuto}}
 <button class="ui small button positive {{if isSaving 'loading'}}" {{action 'saveTweetAction'}}>
   <i class="icon save"></i>
   Save
 </button>
+{{/unless}}

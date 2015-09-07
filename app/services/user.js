@@ -18,12 +18,18 @@ export default Ember.Service.extend({
   },
 
   checkUsernameValidity(username) {
-    return ajax({
-      url: config.apiDomain + '/check_username',
-      type: 'GET',
-      data: {
-        username: username
-      }
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      ajax({
+        url: config.apiDomain + '/check_username',
+        type: 'GET',
+        data: {
+          username: username
+        }
+      }).then(function(response) {
+        resolve(response);
+      }, function(response) {
+        reject(response);
+      })
     });
   },
 
@@ -32,19 +38,28 @@ export default Ember.Service.extend({
       'data.fav_users': users,
       'data.onboard_fav_users': true
     });
-    return ajax({
-      url: config.apiDomain + '/fav_users',
-      type: 'POST',
-      contentType: 'application/json; charset=utf-8',
-      data: JSON.stringify({
-        fav_users: users.map(function(user) {
-          return {
-            username: user.username,
-            name: user.name,
-            profile_image_url: user.profile_image_url
-          };
+    NProgress.start();
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      ajax({
+        url: config.apiDomain + '/fav_users',
+        type: 'POST',
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify({
+          fav_users: users.map(function(user) {
+            return {
+              username: user.username,
+              name: user.name,
+              profile_image_url: user.profile_image_url
+            };
+          })
         })
-      })
+      }).then(function(response) {
+        resolve(response);
+      }, function(response) {
+        reject(response);
+      }).finally(function() {
+        NProgress.done();
+      });
     });
   },
 
@@ -53,17 +68,26 @@ export default Ember.Service.extend({
       'data.fav_keywords': keywords,
       'data.onboard_fav_keywords': true
     });
-    return ajax({
-      url: config.apiDomain + '/fav_keywords',
-      type: 'POST',
-      contentType: 'application/json; charset=utf-8',
-      data: JSON.stringify({
-        fav_keywords: keywords.map(function(keyword) {
-          return {
-            keyword: keyword.keyword
-          };
+    NProgress.start();
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      ajax({
+        url: config.apiDomain + '/fav_keywords',
+        type: 'POST',
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify({
+          fav_keywords: keywords.map(function(keyword) {
+            return {
+              keyword: keyword.keyword
+            };
+          })
         })
-      })
+      }).then(function(response) {
+        resolve(response);
+      }, function(response) {
+        reject(response);
+      }).finally(function() {
+        NProgress.done();
+      });
     });
   },
 
@@ -72,13 +96,22 @@ export default Ember.Service.extend({
       'data.tweet_action': tweetAction,
       'data.onboard_tweet_action': true
     });
-    return ajax({
-      url: config.apiDomain + '/tweet_action',
-      type: 'POST',
-      contentType: 'application/json; charset=utf-8',
-      data: JSON.stringify({
-        tweet_action: tweetAction
-      })
+    NProgress.start();
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      ajax({
+        url: config.apiDomain + '/tweet_action',
+        type: 'POST',
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify({
+          tweet_action: tweetAction
+        })
+      }).then(function(response) {
+        resolve(response);
+      }, function(response) {
+        reject(response);
+      }).finally(function() {
+        NProgress.done();
+      });
     });
   },
 
@@ -98,13 +131,22 @@ export default Ember.Service.extend({
 
   saveTweetActivity(isActivityOn) {
     var activity = isActivityOn === true ? 'ON' : 'OFF';
-    return ajax({
-      url: config.apiDomain + '/activity',
-      type: 'POST',
-      contentType: 'application/json; charset=utf-8',
-      data: JSON.stringify({
-        activity: activity
-      })
+    NProgress.start();
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      ajax({
+        url: config.apiDomain + '/activity',
+        type: 'POST',
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify({
+          activity: activity
+        })
+      }).then(function(response) {
+        resolve(response);
+      }, function(response) {
+        reject(response);
+      }).finally(function() {
+        NProgress.done();
+      });
     });
   }
 });

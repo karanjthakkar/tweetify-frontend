@@ -8,6 +8,7 @@ export default Ember.Component.extend({
 
   value: '',
   optionValueList: null,
+  shouldSubmitAuto: false,
 
   eventBus: Ember.inject.service(),
   user: Ember.inject.service(),
@@ -48,7 +49,7 @@ export default Ember.Component.extend({
         return alert('Add more');
       }
 
-      if (this.get('isSaving')) {
+      if (this.get('isSaving') && !this.get('shouldSubmitAuto')) {
         return;
       }
 
@@ -86,8 +87,18 @@ export default Ember.Component.extend({
         value = this.sanitizeValue(value);
 
         if (this.get('optionType') === 'USERS') {
+          var isUsernameAlreadyPresent = this.get('optionValueList').filter((item) => {
+            return item.username.toLowerCase() === value.toLowerCase();
+          });
+          if (isUsernameAlreadyPresent.length > 0) {
+            this.set('isAdding', false);
+            return alert('already there');
+          }
           this.get('user').checkUsernameValidity(value).then((response) => {
             this.get('optionValueList').pushObject(response.user);
+            if (this.get('shouldSubmitAuto')) {
+              this.send('submitFavList');
+            }
           }, () => {
             alert('username not found');
           }).finally(() => {
@@ -100,9 +111,19 @@ export default Ember.Component.extend({
             }, 1);
           });
         } else {
+          var isKeywordAlreadyPresent = this.get('optionValueList').filter((item) => {
+            return item.keyword.toLowerCase() === value.toLowerCase();
+          });
+          if (isKeywordAlreadyPresent.length > 0) {
+            this.set('isAdding', false);
+            return alert('already there');
+          }
           this.get('optionValueList').pushObject({
             keyword: value
           });
+          if (this.get('shouldSubmitAuto')) {
+            this.send('submitFavList');
+          }
           this.setProperties({
             'value': '',
             'isAdding': false
@@ -122,6 +143,9 @@ export default Ember.Component.extend({
     },
     removeFavItem(value) {
       this.get('optionValueList').removeObject(value);
+      if (this.get('shouldSubmitAuto')) {
+        this.send('submitFavList');
+      }
     }
   }
 });

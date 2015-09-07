@@ -1,21 +1,31 @@
-{{#link-to 'app.profile'}}
-  Dashboard
-{{/link-to}}
-{{#link-to 'app.settings'}}
-  Settings
-{{/link-to}}
-{{#link-to 'app.profile.scheduled'}}
-  Scheduled
-{{/link-to}}
-{{#link-to 'app.profile.posted'}}
-  Posted
-{{/link-to}}
-{{#link-to 'logout'}}
-  Logout
-{{/link-to}}
+<div class="ui left demo vertical visible inverted sidebar labeled icon menu app-menu">
+  {{#link-to 'app.profile' class='item'}}
+    <i class="home icon"></i>
+    Dashboard
+  {{/link-to}}
+  {{#link-to 'app.settings' class='item'}}
+    <i class="settings icon"></i>
+    Settings
+  {{/link-to}}
+  {{#link-to 'logout' class='item bottom'}}
+    <i class="sign out icon"></i>
+    Logout
+  {{/link-to}}
+</div>
 
-{{tweet-activity}}
+<div class="pusher app-body">
 
-<p>currentUser: {{session.currentUser.username}}</p>
+  {{#link-to 'app.profile.scheduled'}}
+    Scheduled
+  {{/link-to}}
+  {{#link-to 'app.profile.posted'}}
+    Posted
+  {{/link-to}}
 
-{{outlet}}
+  {{tweet-activity}}
+
+  <p>currentUser: {{session.currentUser.username}}</p>
+
+  {{outlet}}
+
+</div>

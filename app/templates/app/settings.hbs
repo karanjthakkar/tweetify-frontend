@@ -1,27 +1,36 @@
-{{#link-to 'app.profile'}}
-  Dashboard
-{{/link-to}}
-{{#link-to 'app.settings'}}
-  Settings
-{{/link-to}}
-{{#link-to 'app.profile.scheduled'}}
-  Scheduled
-{{/link-to}}
-{{#link-to 'app.profile.posted'}}
-  Posted
-{{/link-to}}
-{{#link-to 'logout'}}
-  Logout
-{{/link-to}}
+<div class="ui left demo vertical visible inverted sidebar labeled icon menu app-menu">
+  {{#link-to 'app.profile' class='item'}}
+    <i class="home icon"></i>
+    Dashboard
+  {{/link-to}}
+  {{#link-to 'app.settings' class='item'}}
+    <i class="settings icon"></i>
+    Settings
+  {{/link-to}}
+  {{#link-to 'logout' class='item bottom'}}
+    <i class="sign out icon"></i>
+    Logout
+  {{/link-to}}
+</div>
 
-Favorite Users:
+<div class="app-body">
 
-{{tweetify-options optionType='USERS' initOptionValueList=user.data.fav_users redirect=false}}
+  <div class="ui segment">
+    <h2 class="settings__heading">Favorite Users</h2>
+    <h5 class="settings__subheading">We will find awesome and engaging content shared by these people</h5>
+    {{tweetify-options optionType='USERS' initOptionValueList=user.data.fav_users redirect=false shouldSubmitAuto=true}}
+  </div>
 
-Favorite keywords
+  <div class="ui segment">
+    <h2 class="settings__heading">Favorite keywords</h2>
+    <h5 class="settings__subheading">Only tweets with these words will be shared. All keywords are case-insensitive</h5>
+    {{tweetify-options optionType='KEYWORDS' initOptionValueList=user.data.fav_keywords redirect=false shouldSubmitAuto=true}}
+  </div>
 
-{{tweetify-options optionType='KEYWORDS' initOptionValueList=user.data.fav_keywords redirect=false}}
+  <div class="ui segment">
+    <h2 class="settings__heading">Tweet Action</h2>
+    <h5 class="settings__subheading">The action to be taken on the content found by Tweetify.</h5>
+    {{tweet-action initCurrentAction=user.data.tweet_action redirect=false shouldSubmitAuto=true}}
+  </div>
 
-Tweet Action
-
-{{tweet-action initCurrentAction=user.data.tweet_action redirect=false}}
+</div>
