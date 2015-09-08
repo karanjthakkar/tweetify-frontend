@@ -8,7 +8,6 @@ export default Ember.Component.extend({
 
   value: '',
   optionValueList: null,
-  shouldSubmitAuto: false,
 
   eventBus: Ember.inject.service(),
   user: Ember.inject.service(),
@@ -46,10 +45,11 @@ export default Ember.Component.extend({
     submitFavList() {
 
       if (this.get('optionValueList.length') < this.get('optionValueMinLimit')) {
-        return alert('Add more');
+        toastr.error(`Please add a minimum of ${this.get('optionValueMinLimit')} ${this.get('optionType').toLowerCase()}`);
+        return;
       }
 
-      if (this.get('isSaving') && !this.get('shouldSubmitAuto')) {
+      if (this.get('isSaving')) {
         return;
       }
 
@@ -61,9 +61,18 @@ export default Ember.Component.extend({
       this.get('user')[`saveFav${saveOption}`](this.get('optionValueList')).then(() => {
         if (this.get('redirect')) {
           this.get('eventBus').publish(`onboardComplete:fav_${lowerCaseOption}`);
+        } else {
+          toastr.success(`${Ember.String.capitalize(this.get('optionType').toLowerCase())} saved successfully.`);
         }
       }, () => {
-        alert('error saving fav');
+        var errorMsg = 'Error saving data';
+        if (error.jqXHR.status === 0) {
+          errorMsg = 'You are offline.'
+        }
+        if (error.jqXHR.responseJSON) {
+          errorMsg = error.jqXHR.responseJSON.message;
+        }
+        toastr.error(errorMsg);
       }).finally(() => {
         this.set('isSaving', false);
       });
@@ -96,9 +105,6 @@ export default Ember.Component.extend({
           }
           this.get('user').checkUsernameValidity(value).then((response) => {
             this.get('optionValueList').pushObject(response.user);
-            if (this.get('shouldSubmitAuto')) {
-              this.send('submitFavList');
-            }
           }, () => {
             alert('username not found');
           }).finally(() => {
@@ -121,9 +127,6 @@ export default Ember.Component.extend({
           this.get('optionValueList').pushObject({
             keyword: value
           });
-          if (this.get('shouldSubmitAuto')) {
-            this.send('submitFavList');
-          }
           this.setProperties({
             'value': '',
             'isAdding': false
@@ -142,10 +145,6 @@ export default Ember.Component.extend({
       }
     },
     removeFavItem(value) {
-      this.get('optionValueList').removeObject(value);
-      if (this.get('shouldSubmitAuto')) {
-        this.send('submitFavList');
-      }
-    }
+      this.get('optionValueList').removeObject(value);    }
   }
 });

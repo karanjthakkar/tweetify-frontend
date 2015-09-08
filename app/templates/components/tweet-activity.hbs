@@ -1,13 +1,10 @@
-{{#if isTweetActivityOn}}
-  Stop tweet monitoring
-{{else}}
-  Start tweet monitoring
-{{/if}}
+Content Sharing is {{if isTweetActivityOn 'ON' 'OFF'}}
 
 {{input
   id=user.data.id
   type='checkbox'
+  class='tgl tgl-ios'
   checked=isTweetActivityOn
   disabled=isSaving
 }}
-<label for={{user.data.id}}></label>
+<label for={{user.data.id}} class='tgl-btn'></label>

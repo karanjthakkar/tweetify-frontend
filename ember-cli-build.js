@@ -26,6 +26,10 @@ module.exports = function(defaults) {
   app.import(app.bowerDirectory + '/semantic/dist/semantic.js');
   app.import(app.bowerDirectory + '/nprogress/nprogress.css');
   app.import(app.bowerDirectory + '/nprogress/nprogress.js');
+  app.import(app.bowerDirectory + '/numeral/numeral.js');
+  app.import(app.bowerDirectory + '/moment/moment.js');
+  app.import(app.bowerDirectory + '/toastr/toastr.js');
+  app.import(app.bowerDirectory + '/toastr/toastr.css');
 
   // Use `app.import` to add additional libraries to the generated
   // output files.

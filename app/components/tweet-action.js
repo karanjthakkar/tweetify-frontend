@@ -7,7 +7,6 @@ export default Ember.Component.extend({
 
   currentAction: null,
   redirect: true,
-  shouldSubmitAuto: false,
 
   isSaving: false,
 
@@ -32,13 +31,10 @@ export default Ember.Component.extend({
   actions: {
     setTweetAction(actionType) {
       this.set('currentAction', actionType);
-      if (this.get('shouldSubmitAuto')) {
-        this.send('saveTweetAction');
-      }
     },
     saveTweetAction() {
 
-      if (this.get('isSaving') && !this.get('shouldSubmitAuto')) {
+      if (this.get('isSaving')) {
         return;
       }
 
@@ -47,9 +43,18 @@ export default Ember.Component.extend({
       this.get('user').saveTweetAction(this.get('currentAction')).then(() => {
         if (this.get('redirect')) {
           this.get('eventBus').publish('onboardComplete:tweet_action');
+        } else {
+          toastr.success(`Tweet action saved successfully.`);
         }
       }, () => {
-        alert('error saving tweet action');
+        var errorMsg = 'Error saving tweet action';
+        if (error.jqXHR.status === 0) {
+          errorMsg = 'You are offline.'
+        }
+        if (error.jqXHR.responseJSON) {
+          errorMsg = error.jqXHR.responseJSON.message;
+        }
+        toastr.error(errorMsg);
       }).finally(() => {
         this.set('isSaving', false);
       });

@@ -10,9 +10,8 @@
     {{/each}}
   </div>
 </div>
-{{#unless shouldSubmitAuto}}
+
 <button class="ui small button positive {{if isSaving 'loading'}}" {{action 'saveTweetAction'}}>
   <i class="icon save"></i>
   Save
 </button>
-{{/unless}}

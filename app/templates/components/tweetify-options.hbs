@@ -38,13 +38,11 @@
 {{/each}}
 <br>
 
-{{#unless shouldSubmitAuto}}
-  <button class="ui small button positive {{if isSaving 'loading'}}" {{action 'submitFavList'}}>
-    <i class="icon save"></i>
-    {{#if (is-eq optionType 'USERS')}}
-      Save Users
-    {{else}}
-      Save Keywords
-    {{/if}}
-  </button>
-{{/unless}}
+<button class="ui small button positive {{if isSaving 'loading'}}" {{action 'submitFavList'}}>
+  <i class="icon save"></i>
+  {{#if (is-eq optionType 'USERS')}}
+    Save Users
+  {{else}}
+    Save Keywords
+  {{/if}}
+</button>
