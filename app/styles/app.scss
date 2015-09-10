@@ -154,6 +154,11 @@ body .app-body {
   }
 }
 
+.loading__container {
+  position: relative;
+  height: 400px;
+}
+
 .tgl {
   display: none;
   // add default box-sizing for this scope
