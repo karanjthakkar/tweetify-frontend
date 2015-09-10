@@ -1,5 +1,37 @@
 {{#each model as |postedTweet|}}
-  <div>{{postedTweet.tweet_text}}</div>
+  <div class="ui segment">
+    <div class="header">
+      <div class="ui circular mini image">
+        <img src={{postedTweet.original_tweet_profile_image_url}}>
+      </div>
+      {{#if (is-eq postedTweet.tweet_type 'original')}}
+        Posted by
+      {{else}}
+        Retweeted by
+      {{/if}}
+      @{{postedTweet.original_tweet_author}}
+    </div>
+    <div class="content">
+      {{postedTweet.tweet_text}}
+    </div>
+    <div class="extra content">
+      {{#if postedTweet.error}}
+        <i class="send outline icon"></i>
+        Posted on: {{format-time postedTweet.posted_at}}
+      {{else}}
+        <i class="warning sign icon"></i>
+        Not posted: {{postedTweet.error}}
+      {{/if}}
+    </div>
+    {{#unless postedTweet.error}}
+      <div class="extra content">
+        <a class="ui right floated" href="//twitter.com/{{postedTweet.original_tweet_author}}/status/{{postedTweet.posted_tweet_id}}">
+          View original status
+          <i class="external icon"></i>
+        </a>
+      </div>
+    {{/unless}}
+  </div>
 {{else}}
   You have no posted tweets. Check back in an hour
 {{/each}}

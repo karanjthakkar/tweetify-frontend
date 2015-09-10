@@ -18,15 +18,17 @@
   <div class="ui grid">
     <div class="two column row">
       <div class="eleven wide column">
-        {{#link-to 'app.profile.scheduled'}}
-          Scheduled
-        {{/link-to}}
-        {{#link-to 'app.profile.posted'}}
-          Posted
-        {{/link-to}}
-
-        {{outlet}}
-
+        <div class="ui secondary pointing menu">
+          {{#link-to 'app.profile.scheduled' class="item"}}
+            Scheduled
+          {{/link-to}}
+          {{#link-to 'app.profile.posted' class="item"}}
+            Posted
+          {{/link-to}}
+        </div>
+        <div>
+          {{outlet}}
+        </div>
       </div>
       <div class="five wide column">
         <div class="ui cards">

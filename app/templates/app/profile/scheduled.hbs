@@ -1,5 +1,32 @@
-{{#each model as |scheduledTweet|}}
-  <div>{{scheduledTweet.tweet_text}}</div>
-{{else}}
-  You have no scheduled tweets. Check back in an hour
-{{/each}}
+<div class="ui divided items">
+  {{#each model as |scheduledTweet|}}
+    <div class="item">
+      <div class="content">
+        <div class="header">
+          <div class="ui circular mini image">
+            <img src={{scheduledTweet.original_tweet_profile_image_url}}>
+          </div>
+          {{#if (is-eq scheduledTweet.tweet_type 'original')}}
+            Posted by
+          {{else}}
+            Retweeted by
+          {{/if}}
+          @{{scheduledTweet.original_tweet_author}}
+        </div>
+        <div class="description">
+          {{scheduledTweet.tweet_text}}
+        </div>
+        <div class="extra content">
+          <i class="history icon"></i>
+          Will be posted on: {{format-time scheduledTweet.scheduled_at}}
+          <a class="ui right floated" href="//twitter.com/{{scheduledTweet.original_tweet_author}}/status/{{scheduledTweet.original_tweet_id}}">
+            View original status
+            <i class="external icon"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  {{else}}
+    You have no scheduled tweets. Check back in an hour
+  {{/each}}
+</div>
