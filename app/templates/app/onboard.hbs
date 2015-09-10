@@ -1,0 +1,28 @@
+<div class="onboarding">
+  <div class="progress">
+    <div class="circle__container">
+      <div class="circle {{if isFavUsersDone 'done'}}">
+        <span class="label">1</span>
+      </div>
+      <span class="title">Favorite Users</span>
+    </div>
+    <span class="bar {{if isFavUsersDone 'done'}}"></span>
+    <div class="circle__container">
+      <div class="circle {{if isFavKeywordsDone 'done'}}">
+        <span class="label">2</span>
+      </div>
+      <span class="title">Favorite Keywords</span>
+    </div>
+    <span class="bar {{if isFavKeywordsDone 'done'}}"></span>
+    <div class="circle__container">
+      <div class="circle {{if isTweetActionDone 'done'}}">
+        <span class="label">3</span>
+      </div>
+      <span class="title">Tweet Action</span>
+    </div>
+  </div>
+</div>
+
+<div class="center-align onboarding__wrapper">
+  {{outlet}}
+</div>

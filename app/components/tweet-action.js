@@ -12,7 +12,7 @@ export default Ember.Component.extend({
 
   actionTypes: [{
     type: 'COPY',
-    labelText: 'Same Content'
+    labelText: 'Share Same Content'
   }, {
     type: 'NATIVE_RT',
     labelText: 'Native Retweet'

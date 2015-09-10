@@ -17,24 +17,26 @@
 {{#each optionValueList as |optionValue|}}
 
   {{#if (is-eq optionType 'USERS')}}
-    <a class="ui small label">
+    <a class="ui image label">
       <img class="ui right spaced avatar image" src={{optionValue.profile_image_url}}>
       @{{optionValue.username}}
       <i class="delete icon" {{action 'removeFavItem' optionValue}}></i>
     </a>
   {{else}}
-    <a class="ui small label">
+    <a class="ui image label">
       <i class="star icon"></i>
       {{optionValue.keyword}}
       <i class="delete icon" {{action 'removeFavItem' optionValue}}></i>
     </a>
   {{/if}}
 {{else}}
-  {{#if (is-eq optionType 'USERS')}}
-    Add a minimum of {{optionValueMinLimit}} users for finding best content
-  {{else}}
-    Add a minimum of {{optionValueMinLimit}} keywords sharing relevant content
-  {{/if}}
+  <div class="empty__warning">
+    {{#if (is-eq optionType 'USERS')}}
+      Add a minimum of {{optionValueMinLimit}} users for finding best content
+    {{else}}
+      Add a minimum of {{optionValueMinLimit}} keywords sharing relevant content
+    {{/if}}
+  </div>
 {{/each}}
 <br>
 
