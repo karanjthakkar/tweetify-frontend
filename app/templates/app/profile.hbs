@@ -39,7 +39,9 @@
               {{/if}}
             </div>
             <div class="ui centered circular image profile__image">
-              <img src={{session.currentUser.profile_image_url}}>
+              {{#lazy-background-image url=session.currentUser.profile_image_url}}
+                <img src="images/empty.png">
+              {{/lazy-background-image}}
             </div>
             <div class="content user__profile__details">
               <a class="ui centered header" href="//twitter.com/{{session.currentUser.username}}" target="_blank">@{{session.currentUser.username}}</a>

@@ -30,6 +30,7 @@ module.exports = function(defaults) {
   app.import(app.bowerDirectory + '/moment/moment.js');
   app.import(app.bowerDirectory + '/toastr/toastr.js');
   app.import(app.bowerDirectory + '/toastr/toastr.css');
+  app.import(app.bowerDirectory + '/twitter-text-js/js/twitter-text.js');
 
   // Use `app.import` to add additional libraries to the generated
   // output files.

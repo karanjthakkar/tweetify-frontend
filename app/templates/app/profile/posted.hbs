@@ -1,37 +1,56 @@
-{{#each model as |postedTweet|}}
-  <div class="ui segment">
-    <div class="header">
-      <div class="ui circular mini image">
-        <img src={{postedTweet.original_tweet_profile_image_url}}>
+<div class="ui divided items">
+  {{#each model as |postedTweet|}}
+
+    <div class="item">
+      <div class="content">
+        <div class="ui header">
+          <div class="ui circular mini image user__image">
+            {{#lazy-background-image url=postedTweet.original_tweet_profile_image_url}}
+              <img src="images/empty.png">
+            {{/lazy-background-image}}
+          </div>
+          <div class="tweet_author_details">
+            <a class="tweet__author__link" href="//twitter.com/{{postedTweet.original_tweet_author}}">
+              @
+              <span class="tweet__author__username">{{postedTweet.original_tweet_author}}</span>
+            </a>
+            {{#if (is-eq postedTweet.tweet_type 'original')}}
+              posted
+            {{else}}
+              retweeted
+            {{/if}}
+          </div>
+          <a class="ui {{color-score postedTweet.tweet_score}} basic small label tweet__score">
+            Score: {{postedTweet.tweet_score}}
+          </a>
+        </div>
+        <div class="description tweet__text">
+          {{auto-link postedTweet.tweet_text}}
+        </div>
+        <div class="extra content">
+          {{#if postedTweet.error}}
+            <i class="warning sign icon tweet__action__icon"></i>
+            <span class="black tweet__action__type">Not posted:</span> {{postedTweet.error}}
+          {{else}}
+            <i class="history icon tweet__action__icon"></i>
+            <span class="black tweet__action__type">Posted on:</span> {{format-time postedTweet.posted_at}}
+          {{/if}}
+          {{#unless postedTweet.error}}
+            <a class="ui right floated" target="_blank" href="//twitter.com/{{postedTweet.original_tweet_author}}/status/{{postedTweet.posted_tweet_id}}">
+              <span class="tweet__link">
+                View posted status
+              </span>
+              <i class="external icon"></i>
+            </a>
+          {{/unless}}
+        </div>
       </div>
-      {{#if (is-eq postedTweet.tweet_type 'original')}}
-        Posted by
-      {{else}}
-        Retweeted by
-      {{/if}}
-      @{{postedTweet.original_tweet_author}}
     </div>
-    <div class="content">
-      {{postedTweet.tweet_text}}
-    </div>
-    <div class="extra content">
-      {{#if postedTweet.error}}
-        <i class="send outline icon"></i>
-        Posted on: {{format-time postedTweet.posted_at}}
-      {{else}}
-        <i class="warning sign icon"></i>
-        Not posted: {{postedTweet.error}}
-      {{/if}}
-    </div>
-    {{#unless postedTweet.error}}
-      <div class="extra content">
-        <a class="ui right floated" href="//twitter.com/{{postedTweet.original_tweet_author}}/status/{{postedTweet.posted_tweet_id}}">
-          View original status
-          <i class="external icon"></i>
-        </a>
+    {{else}}
+      <div class="item">
+        <div class="content">
+          We could not find kickass content for sharing. {{#link-to 'app.settings' class="help__link"}}Click here{{/link-to}} and change your keywords or favorite users to find better content
+        </div>
       </div>
-    {{/unless}}
-  </div>
-{{else}}
-  You have no posted tweets. Check back in an hour
-{{/each}}
+    {{/each}}
+</div>
