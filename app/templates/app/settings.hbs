@@ -16,19 +16,19 @@
 <div class="app-body">
 
   <div class="ui segment">
-    <h2 class="settings__heading">Favorite Users</h2>
+    <h2 class="settings__heading bold">Favorite Users</h2>
     <h5 class="settings__subheading">We will find awesome and engaging content shared by these people</h5>
     {{tweetify-options optionType='USERS' initOptionValueList=user.data.fav_users redirect=false}}
   </div>
 
   <div class="ui segment">
-    <h2 class="settings__heading">Favorite keywords</h2>
+    <h2 class="settings__heading bold">Favorite keywords</h2>
     <h5 class="settings__subheading">Only tweets with these words will be shared. All keywords are case-insensitive</h5>
     {{tweetify-options optionType='KEYWORDS' initOptionValueList=user.data.fav_keywords redirect=false}}
   </div>
 
   <div class="ui segment">
-    <h2 class="settings__heading">Tweet Action</h2>
+    <h2 class="settings__heading bold">Tweet Action</h2>
     <h5 class="settings__subheading">The action to be taken on the content found by Tweetify.</h5>
     {{tweet-action initCurrentAction=user.data.tweet_action redirect=false}}
   </div>

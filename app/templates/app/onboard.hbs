@@ -1,28 +1,56 @@
-<div class="onboarding">
-  <div class="progress">
-    <div class="circle__container">
-      <div class="circle {{if isFavUsersDone 'done'}}">
-        <span class="label">1</span>
-      </div>
-      <span class="title">Favorite Users</span>
-    </div>
-    <span class="bar {{if isFavUsersDone 'done'}}"></span>
-    <div class="circle__container">
-      <div class="circle {{if isFavKeywordsDone 'done'}}">
-        <span class="label">2</span>
-      </div>
-      <span class="title">Favorite Keywords</span>
-    </div>
-    <span class="bar {{if isFavKeywordsDone 'done'}}"></span>
-    <div class="circle__container">
-      <div class="circle {{if isTweetActionDone 'done'}}">
-        <span class="label">3</span>
-      </div>
-      <span class="title">Tweet Action</span>
-    </div>
-  </div>
+<div class="ui top menu onboarding__menu">
+  <a class="item floated left">TWEETIFY</a>
+  {{#link-to 'logout' class="item floated right"}}
+    LOGOUT
+  {{/link-to}}
 </div>
 
-<div class="center-align onboarding__wrapper">
-  {{outlet}}
+<div>
+  <div class="onboarding">
+    <div class="progress">
+      <div class="circle__container">
+        <div class="circle {{if (is-eq activeRoute 'users') 'active'}} {{if isFavUsersDone 'done'}}">
+          <span class="label {{if (is-eq activeRoute 'users') 'active'}} {{if isFavUsersDone 'done'}}">
+            {{#if isFavUsersDone}}
+              ✓
+            {{else}}
+              1
+            {{/if}}
+          </span>
+        </div>
+        <span class="title">Favorite Users</span>
+      </div>
+      <span class="bar {{if isFavUsersDone 'done'}}"></span>
+      <div class="circle__container">
+        <div class="circle {{if (is-eq activeRoute 'keywords') 'active'}} {{if isFavKeywordsDone 'done'}}">
+          <span class="label {{if (is-eq activeRoute 'keywords') 'active'}} {{if isFavKeywordsDone 'done'}}">
+            {{#if isFavKeywordsDone}}
+              ✓
+            {{else}}
+              2
+            {{/if}}
+          </span>
+        </div>
+        <span class="title">Favorite Keywords</span>
+      </div>
+      <span class="bar {{if isFavKeywordsDone 'done'}}"></span>
+      <div class="circle__container">
+        <div class="circle {{if (is-eq activeRoute 'action') 'active'}} {{if isTweetActionDone 'done'}}">
+          <span class="label {{if (is-eq activeRoute 'action') 'active'}} {{if isTweetActionDone 'done'}}">
+            {{#if isTweetActionDone}}
+              ✓
+            {{else}}
+              3
+            {{/if}}
+          </span>
+        </div>
+        <span class="title">Tweet Action</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="center-align onboarding__wrapper">
+    {{outlet}}
+  </div>
+
 </div>

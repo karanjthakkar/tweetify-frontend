@@ -22,7 +22,6 @@ module.exports = function(defaults) {
   app.import(app.bowerDirectory + '/semantic/dist/themes/default/assets/fonts/icons.svg', {
     destDir: 'assets/themes/default/assets/fonts'
   });
-  app.import(app.bowerDirectory + '/semantic/dist/semantic.css');
   app.import(app.bowerDirectory + '/semantic/dist/semantic.js');
   app.import(app.bowerDirectory + '/nprogress/nprogress.css');
   app.import(app.bowerDirectory + '/nprogress/nprogress.js');

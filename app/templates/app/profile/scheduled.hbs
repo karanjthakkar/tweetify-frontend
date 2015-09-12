@@ -40,7 +40,9 @@
     </div>
   {{else}}
     <div class="item">
-      Tweetify has not scheduled any tweets for the next hour. {{#link-to 'app.settings' class="help__link"}}Click here{{/link-to}} and change your keywords to find better content
+      <div class="content">
+        Tweetify has not scheduled any tweets for the next hour. {{#link-to 'app.settings' class="help__link"}}Click here{{/link-to}} and change your keywords to find better content
+      </div>
     </div>
   {{/each}}
 </div>
