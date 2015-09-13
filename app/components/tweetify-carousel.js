@@ -37,5 +37,11 @@ export default Ember.Component.extend({
         }, 8500);
       }
     });
-  })
+  }),
+
+  actions: {
+    signInViaTwitter: function() {
+      this.sendAction('signInViaTwitter');
+    }
+  }
 });

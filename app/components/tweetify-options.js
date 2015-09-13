@@ -33,6 +33,10 @@ export default Ember.Component.extend({
     }
   }),
 
+  focusOnInsert: Ember.on('didInsertElement', function() {
+    this.$('.js-option-value').focus();
+  }),
+
   sanitizeValue(value) {
     var length = value.length;
     if (value.charAt(0) === '@') {
@@ -83,7 +87,8 @@ export default Ember.Component.extend({
 
       if (keyCode === 13) {
         if (this.get('optionValueList.length') === this.get('optionValueMaxLimit')) {
-          return alert('Cannot add more');
+          toastr.error(`You can only add upto ${this.get('optionValueMaxLimit')} ${this.get('optionType').toLowerCase()}`);
+          return;
         }
 
         if (this.get('isAdding')) {
@@ -101,12 +106,13 @@ export default Ember.Component.extend({
           });
           if (isUsernameAlreadyPresent.length > 0) {
             this.set('isAdding', false);
-            return alert('already there');
+            toastr.error('User is already in list');
+            return;
           }
           this.get('user').checkUsernameValidity(value).then((response) => {
             this.get('optionValueList').pushObject(response.user);
           }, () => {
-            alert('username not found');
+            toastr.error('This is not a valid twitter account');
           }).finally(() => {
             this.setProperties({
               'value': '',
@@ -122,7 +128,8 @@ export default Ember.Component.extend({
           });
           if (isKeywordAlreadyPresent.length > 0) {
             this.set('isAdding', false);
-            return alert('already there');
+            toastr.error('Keyword is already in list');
+            return;
           }
           this.get('optionValueList').pushObject({
             keyword: value

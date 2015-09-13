@@ -1,7 +1,22 @@
-<div class="ui top menu onboarding__menu">
-  <a class="item floated left">TWEETIFY</a>
+<div class="top-section">
+  <div class="logo__container">
+    <a href="/" class="logo bold">TWEETIFY</a>
+  </div>
+
+  <div class="main-section">
+    <h1 class="usp">THE MISSING CONTENT AUTOMATION TOOL</h1>
+    {{tweetify-carousel signInViaTwitter='signInViaTwitter'}}
+  </div>
 </div>
 
-<section class="section-wrapper">
-  {{tweetify-carousel}}
-</section>
+<div class="how-section module">
+  <h1 class="module__heading">HOW IT WORKS</h1>
+  <ol class="custom-bullet">
+    <li>You log in with Twitter and authorize Tweetify to access your Twitter feed</li>
+    <li>You setup your favorite users and keywords</li>
+    <li>We start hourly monitoring of your feed for posts by any of your favorite users</li>
+    <li>We filter posts containing your specified keywords</li>
+    <li>We find top tweets based on engagement, reach, spam level, etc.</li>
+    <li>We schedule top 5 of these tweets over the next hour</li>
+  </ol>
+</div>
