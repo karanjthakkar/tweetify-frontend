@@ -38,9 +38,8 @@
     {{/if}}
   </div>
 {{/each}}
-<br>
 
-<button class="ui small large button positive {{if isSaving 'loading'}}" {{action 'submitFavList'}}>
+<button class="ui large button positive {{if isSaving 'loading'}}" {{action 'submitFavList'}}>
   <i class="icon save"></i>
   {{#if (is-eq optionType 'USERS')}}
     Save Users
