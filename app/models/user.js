@@ -8,6 +8,7 @@ export default DS.Model.extend({
   following: DS.attr(),
   profile_image_url: DS.attr(),
   profile_banner_url: DS.attr(),
+  created_at: DS.attr(),
   last_cron_run_time: DS.attr(),
   total_tweets_posted: DS.attr(),
   total_tweets_scheduled: DS.attr(),

@@ -45,11 +45,24 @@
         </div>
       </div>
     </div>
-    {{else}}
-      <div class="item">
-        <div class="content">
-          We could not find kickass content for sharing. {{#link-to 'app.settings' class="help__link"}}Click here{{/link-to}} and change your keywords or favorite users to find better content
+  {{else}}
+    {{#unless isAccountCreatedTimeMoreThanHour}}
+      <div class="ui segment no-content">
+        <div class="ui header center aligned bold">
+          Congratulations!
         </div>
+        Looks like you setup your account less than an hour. In that case, <span class="bold">your part is over</span>. Now we do the heavy lifting of finding amazing content for you. Come back after an hour to see the awesomeness that we have found.
       </div>
-    {{/each}}
+    {{else}}
+      <div class="ui center aligned segment no-content">
+        <div class="ui huge header center aligned bold">
+          😔
+        </div>
+        It seems that we could not find engaging content for your account. Try adding different users and keywords.
+        {{#link-to 'app.settings' tagName="div" class="ui primary button help__link"}}
+          Change Keywords/Users
+        {{/link-to}}
+      </div>
+    {{/unless}}
+  {{/each}}
 </div>

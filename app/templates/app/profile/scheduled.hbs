@@ -39,10 +39,23 @@
       </div>
     </div>
   {{else}}
-    <div class="item">
-      <div class="content">
-        Tweetify has not scheduled any tweets for the next hour. {{#link-to 'app.settings' class="help__link"}}Click here{{/link-to}} and change your keywords to find better content
+    {{#unless isAccountCreatedTimeMoreThanHour}}
+      <div class="ui segment no-content">
+        <div class="ui header center aligned bold">
+          Congratulations!
+        </div>
+        Looks like you setup your account less than an hour. In that case, <span class="bold">your part is over</span>. Now we do the heavy lifting of finding and posting amazing content for you. Come back after an hour to see the awesomeness that we have found.
       </div>
-    </div>
+    {{else}}
+      <div class="ui center aligned segment no-content">
+        <div class="ui huge header center aligned bold">
+          😔
+        </div>
+        It seems that we could not find engaging content for your account. Try adding different users and keywords.
+        {{#link-to 'app.settings' tagName="div" class="ui primary button help__link"}}
+          Change Keywords/Users
+        {{/link-to}}
+      </div>
+    {{/unless}}
   {{/each}}
 </div>

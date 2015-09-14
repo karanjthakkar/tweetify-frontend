@@ -2,11 +2,11 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
   features: [{
-    title: 'SHARE GREAT CONTENT',
-    text: 'We find great content based on your user and keyword preferences'
-  }, {
     title: 'STAY ACTIVE',
     text: 'We monitor your feed 24 x 7 behind the scenes and post great content every hour'
+  }, {
+    title: 'SHARE GREAT CONTENT',
+    text: 'We find great content based on your user and keyword preferences'
   }, {
     title: 'NO SPAM',
     text: 'We only post the top tweets based on a smart algorithm that ranks tweets and filters spam'
@@ -30,11 +30,8 @@ export default Ember.Component.extend({
         carousel.find('.active').addClass('vis');
       },
       onTranslated: function () {
-        clearTimeout(autohideTimeout);
-        carousel.find('.active').addClass('vis');
-        autohideTimeout = setTimeout(function () {
-          carousel.find('.active').removeClass('vis');
-        }, 8500);
+        carousel.trigger('stop.owl.autoplay');
+        carousel.trigger('play.owl.autoplay');
       }
     });
   }),
