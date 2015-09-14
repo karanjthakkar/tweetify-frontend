@@ -71,7 +71,6 @@ body {
   }
 }
 body {
-  background-color: #F5F5F5;
   .ember-view {
     height: 100%;
   }
@@ -703,7 +702,11 @@ body {
 }
 
 .light-bg {
-  background-color: white;
+  background-color: white!important;
+}
+
+.dark-bg {
+  background-color: #F5F5F5!important;
 }
 
 .site-footer {
