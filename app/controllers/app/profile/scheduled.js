@@ -6,6 +6,6 @@ export default Ember.Controller.extend({
     var created = this.get('user.data.created_at'),
       lastCron = this.get('user.data.last_cron_run_time');
 
-    return (created - lastCron) > 365000;
+    return (lastCron - created) > 365000;
   })
 });
