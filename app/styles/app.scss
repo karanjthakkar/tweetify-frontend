@@ -546,10 +546,8 @@ body {
   margin-top: 50px;
 }
 
-.usp {
-  font-size: 3.2em;
-  margin-top: 30px;
-  text-align: center;
+.ui.header.usp {
+  font-size: 2.6em;
   color: white;
 }
 
@@ -562,7 +560,64 @@ body {
 }
 
 .main-section {
-  padding: 50px 0;
+  padding: 50px 0 0;
+}
+
+.how-section, .feature-section {
+  padding: 30px;
+  .section__heading {
+    color: #6e1e52;
+    margin-bottom: 40px;
+  }
+}
+
+.feature-section {
+  .content {
+    width: 80%;
+    display: inline-block;
+  }
+  .header {
+    color: #6e1e52;
+    font-size: 1.3em;
+  }
+  .description {
+    color: #333333;
+    font-size: 1em;
+  }
+  .feature__icon {
+    margin-right: 30px;
+    font-size: 2.6em;
+    float: left;
+    margin-top: 15px;
+    .icon.twitter {
+      line-height: 1em;
+    }
+  }
+}
+
+.how-section {
+  .module {
+    width: 50%;
+    min-width: 640px;
+    margin: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 1.5rem;
+    background-color: white;
+    border-radius: 3px;
+    margin-bottom: 3rem;
+    .module__heading {
+      margin-top: -1.5rem;
+      margin-right: -1.5rem;
+      margin-bottom: 1.5rem;
+      margin-left: -1.5rem;
+      padding: 0.75rem;
+      text-align: center;
+      text-transform: uppercase;
+      color: white;
+      background-color: #6e1e52;
+    }
+  }
 }
 
 .logo__container {
@@ -621,30 +676,6 @@ body {
         }
       }
     }
-  }
-}
-
-.module {
-  width: 50%;
-  min-width: 640px;
-  margin: 20px;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 1.5rem;
-  background-color: white;
-  border-radius: 3px;
-  margin-bottom: 3rem;
-  .module__heading {
-    margin-top: -1.5rem;
-    margin-right: -1.5rem;
-    margin-bottom: 1.5rem;
-    margin-left: -1.5rem;
-    padding: 0.75rem;
-    font-size: 1.5rem;
-    text-align: center;
-    text-transform: uppercase;
-    color: white;
-    background-color: #6e1e52;
   }
 }
 
@@ -723,5 +754,30 @@ body {
   }
   .icon.heart {
     color: #EA7878;
+  }
+}
+
+.ui.icon.input.option__input__container {
+  width: 500px;
+  display: block;
+  &.center {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .option__input {
+    padding-right: 125px !important;
+    width: 100%;
+    + div.input__focus__label {
+      position: absolute;
+      right: 10px;
+      top: 12px;
+      font-size: 0.8em;
+      opacity: 0;
+      color: #AD4570;
+      @include transition(opacity 0.5s);
+      &.visible {
+        opacity: 1;
+      }
+    }
   }
 }

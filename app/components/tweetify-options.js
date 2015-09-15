@@ -34,6 +34,9 @@ export default Ember.Component.extend({
   }),
 
   focusOnInsert: Ember.on('didInsertElement', function() {
+    if (this.get('optionType') === 'KEYWORDS' && this.get('redirect') === false) {
+      return;
+    }
     this.$('.js-option-value').focus();
   }),
 

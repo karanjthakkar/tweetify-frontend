@@ -1,6 +1,11 @@
-<div class="ui left icon input fluid {{if isAdding 'loading'}}">
+<div class="ui left icon input option__input__container {{if isAdding 'loading'}} {{if redirect 'center'}}">
+  {{#if (is-eq optionType 'USERS')}}
+    <i class="users icon"></i>
+  {{else}}
+    <i class="tag icon"></i>
+  {{/if}}
   {{input
-    class='js-option-value'
+    class='js-option-value option__input'
     type='text'
     value=value
     placeholder=(if (is-eq optionType 'USERS') 'Enter you favorite users here' 'Enter you favorite keywords here')
@@ -8,11 +13,7 @@
     key-up='checkValidity'
     disabled=isAdding
   }}
-  {{#if (is-eq optionType 'USERS')}}
-    <i class="users icon"></i>
-  {{else}}
-    <i class="tag icon"></i>
-  {{/if}}
+  <div class="input__focus__label {{if (is-eq value.length) '' 'visible'}}">Press <span class="bold">enter</span> to add</div>
 </div>
 {{#each optionValueList as |optionValue|}}
 
