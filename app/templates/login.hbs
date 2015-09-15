@@ -1,7 +1,7 @@
 <div class="top-section">
   <div class="logo__container">
     <a href="/" class="logo bold">TWEETIFY</a>
-    <a href="//twitter.com/tweetifyio" target="_blank" class="bold twitter-icon">
+    <a href="//twitter.com/tweetifyio" target="_blank" {{action 'headerFollowClicked'}} class="bold twitter-icon">
       Follow @tweetifyio
       <i class="icon large twitter outline button"></i>
     </a>
@@ -35,8 +35,8 @@
   <h3>
     Made with
     <i class="icon heart"></i>
-    by <a href="//twitter.com/geekykaran" target="_blank">@geekykaran</a>
+    by <a href="//twitter.com/geekykaran" target="_blank" {{action 'footerUsernameClicked'}}>@geekykaran</a>
     <div class="separator">&nbsp;</div>
-    Tell me if you like it: <a href="mailto:karan@tweetify.io?subject=I <3 Tweetify" target="_blank">karan@tweetify.io</a>
+    Tell me if you like it: <a href="mailto:karan@tweetify.io?subject=I <3 Tweetify" target="_blank" {{action 'footerContactMeClicked'}}>karan@tweetify.io</a>
   </h3>
 </div>

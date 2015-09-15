@@ -44,7 +44,7 @@
         {{#if isPostedOnce}}
           <div class="ui center aligned segment no-content">
             <div class="ui header center aligned bold">
-              Yay!
+              Yay! 🎉
             </div>
             All tweets have been posted.
             {{#link-to 'app.profile.posted' tagName="div" class="ui primary button help__link"}}
@@ -58,7 +58,7 @@
             </div>
             It seems that we could not find engaging content for your account. Try adding different users and keywords.
             {{#link-to 'app.settings' tagName="div" class="ui primary button help__link"}}
-              Change Keywords/Users
+              Change Keywords / Users
             {{/link-to}}
           </div>
         {{/if}}
@@ -69,16 +69,16 @@
           </div>
           It seems that we could not find engaging content for your account. Try adding different users and keywords.
           {{#link-to 'app.settings' tagName="div" class="ui primary button help__link"}}
-            Change Keywords/Users
+            Change Keywords / Users
           {{/link-to}}
         </div>
       {{/if}}
     {{else}}
       <div class="ui segment no-content">
         <div class="ui header center aligned bold">
-          Congratulations!
+          Congratulations! Your part is over 🍷
         </div>
-        Looks like you setup your account less than an hour. In that case, <span class="bold">your part is over</span>. Now we do the heavy lifting of finding and posting amazing content for you. Come back after an hour to see the awesomeness that we have found.
+        Looks like you setup your account less than an hour ago. In that case, <span class="bold">your part is over</span>. Now we do the heavy lifting of finding and posting amazing content for you. Come back after an hour to see the awesomeness that we have found.
       </div>
     {{/if}}
   {{/each}}

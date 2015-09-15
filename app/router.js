@@ -2,7 +2,29 @@ import Ember from 'ember';
 import config from './config/environment';
 
 var Router = Ember.Router.extend({
-  location: config.locationType
+  location: config.locationType,
+  analytics: Ember.inject.service(),
+  notifyGoogleAnalytics: Ember.on('didTransition', function() {
+    this.updateTitle(); //coz the title is not updated yet!
+    switch (this.get('url')) {
+      case '/': this.get('analytics').capturePageView('landing');
+        break;
+      case '/logout': this.get('analytics').capturePageView('logout');
+        break;
+      case '/app/onboard/users': this.get('analytics').capturePageView('onboard-user');
+        break;
+      case '/app/onboard/keywords': this.get('analytics').capturePageView('onboard-keyword');
+        break;
+      case '/app/onboard/action': this.get('analytics').capturePageView('onboard-keyword');
+        break;
+      case '/app/settings': this.get('analytics').capturePageView('settings');
+        break;
+      case '/app/profile/posted': this.get('analytics').capturePageView('posted');
+        break;
+      case '/app/profile/scheduled': this.get('analytics').capturePageView('scheduled');
+        break;
+    }
+  })
 });
 
 Router.map(function() {
