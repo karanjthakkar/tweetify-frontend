@@ -58,6 +58,15 @@ body {
 .full-height {
   height: 100%;
 }
+.white {
+  color: white!important;
+}
+.brand {
+  color: #644B5A!important;
+}
+.padded {
+  padding: 20px!important;
+}
 .app-menu.ui.visible.left.sidebar {
   width: 100px;
   & ~ .pusher {
@@ -493,7 +502,7 @@ body {
 .signin__link {
   position: relative;
   text-align: center;
-  margin-top: 45px;
+  margin-top: 20px;
   padding-top: 1px;
   overflow: hidden;
 }
@@ -780,4 +789,21 @@ body {
       }
     }
   }
+}
+
+.top__help {
+  text-align: center;
+  padding-top: 0px!important;
+  .top__help__link {
+    color: #49354E;
+    font-size: 0.8em;
+    border-bottom-style: dotted;
+    border-bottom-color: #49354E;
+    border-bottom-width: 1px;
+    margin: 0 10px;
+  }
+}
+
+.cta-section {
+  padding: 40px;
 }

@@ -12,7 +12,23 @@
     <div class="ui two column relaxed stackable grid">
       <div class="two column row">
         <div class="eight wide column">
-          {{tweetify-carousel signInViaTwitter='signInViaTwitter'}}
+          <div class="home-carousel">
+            <div class="ui header center aligned white padded">
+              Automagically share the most engaging and top performing content based on your preferences
+            </div>
+            <div class="padded top__help">
+              <a class="top__help__link bold" {{action 'scrollToAnchor' 'how'}} href="#">What value does it give?</a>
+              <a class="top__help__link bold" {{action 'scrollToAnchor' 'why'}} href="#">How does it work?</a>
+            </div>
+            <div class="signin__link">
+              <a href="#" {{action 'signInViaTwitter'}} class="primary big ui button">
+                <i class="icon large twitter outline button"></i>
+                <span>
+                  LOGIN WITH TWITTER
+                </span>
+              </a>
+            </div>
+          </div>
         </div>
         <div class="seven wide column">
           <img src="/images/mac.png" class="ui massive image">
@@ -22,8 +38,8 @@
   </div>
 </div>
 
-<div class="feature-section light-bg">
-  <h1 class="ui large header center aligned section__heading">FEATURES</h1>
+<div class="feature-section light-bg" data-anchor="how">
+  <h1 class="ui large header center aligned section__heading">WHY?</h1>
   <div class="ui two column relaxed stackable grid">
     <div class="two column row">
       <div class="seven wide column right floated">
@@ -62,7 +78,7 @@
   </div>
 </div>
 
-<div class="how-section dark-bg">
+<div class="how-section dark-bg" data-anchor="why">
   <div class="module">
     <h1 class="module__heading ui large header">HOW IT WORKS</h1>
     <ol class="custom-bullet">
@@ -76,7 +92,21 @@
   </div>
 </div>
 
-<div class="site-footer light-bg">
+<div class="cta-section">
+  <h1 class="ui large header center aligned section__heading">
+    Make your twitter account active again. Setup in just 30 seconds.
+  </h1>
+  <div class="signin__link">
+    <a href="#" {{action 'signInViaTwitter'}} class="primary big ui button">
+      <i class="icon large twitter outline button"></i>
+      <span>
+        LOGIN WITH TWITTER
+      </span>
+    </a>
+  </div>
+</div>
+
+<div class="site-footer dark-bg">
   <h3>
     <a href="https://twitter.com/tweetifyio" target="_blank" class="twitter-follow-button" data-show-count="true">Follow @tweetifyio</a>
     <script>
