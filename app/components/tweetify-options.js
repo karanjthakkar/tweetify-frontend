@@ -85,7 +85,7 @@ export default Ember.Component.extend({
       });
 
     },
-    checkValidity() {
+    checkValidity(text, event) {
       var keyCode = event.keyCode || event.which;
 
       if (keyCode === 13) {
