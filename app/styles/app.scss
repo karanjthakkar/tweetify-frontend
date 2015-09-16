@@ -562,10 +562,6 @@ body {
 
 .top-section {
   padding-bottom: 20px;
-  background: url('/images/main.jpg');
-  background-size: cover;
-  background-position-y: -75px;
-  background-repeat: no-repeat;
 }
 
 .main-section {
@@ -630,29 +626,31 @@ body {
 }
 
 .logo__container {
-  padding-top: 10px;
   position: relative;
   .twitter-icon {
-    color: white;
+    color: #6e1e52;
     position: absolute;
     right: 40px;
-    top: 30px;
+    top: 16px;
+    opacity: 0.8;
     &:hover {
-      color: #B8B49F;
+      opacity: 1;
     }
   }
   .logo {
-    color: white;
+    color: #6e1e52;
     position: relative;
     display: inline-block;
     padding: 5px;
     font-size: 1.2em;
     margin: 10px;
     cursor: pointer;
+    opacity: 0.8;
     &:hover {
-      color: #B8B49F;
+      opacity: 1;
       &:before, &:after {
-        background-color: #B8B49F;
+        background-color: #6e1e52;
+        opacity: 1;
       }
     }
     &:before {
@@ -662,7 +660,7 @@ body {
       top: 0px;
       left: 25%;
       height: 2px;
-      background-color: white;
+      background-color: #6e1e52;
     }
     &:after {
       content: ' ';
@@ -671,19 +669,7 @@ body {
       bottom: 0px;
       left: 25%;
       height: 2px;
-      background-color: white;
-    }
-    &.logo--dark {
-      color: black;
-      &:before, &:after {
-        background-color: black;
-      }
-      &:hover {
-        color: #B8B49F;
-        &:before, &:after {
-          background-color: #B8B49F;
-        }
-      }
+      background-color: #6e1e52;
     }
   }
 }
