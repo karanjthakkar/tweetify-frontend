@@ -11,6 +11,7 @@ export default Ember.Component.extend({
 
   eventBus: Ember.inject.service(),
   user: Ember.inject.service(),
+  analytics: Ember.inject.service(),
   userType: Ember.computed.alias('user.data.user_type'),
 
   isAdding: false,
@@ -43,6 +44,7 @@ export default Ember.Component.extend({
   sanitizeValue(value) {
     var length = value.length;
     if (value.charAt(0) === '@') {
+      this.get('analytics').captureEvent('log', 'addItem', 'with @');
       return value.slice(1, length);
     }
     return value;
@@ -52,7 +54,9 @@ export default Ember.Component.extend({
     submitFavList() {
 
       if (this.get('optionValueList.length') < this.get('optionValueMinLimit')) {
-        toastr.error(`Please add a minimum of ${this.get('optionValueMinLimit')} ${this.get('optionType').toLowerCase()}`);
+        var errorMsg = `Please add a minimum of ${this.get('optionValueMinLimit')} ${this.get('optionType').toLowerCase()}`;
+        toastr.error(errorMsg);
+        this.get('analytics').captureEvent('error', 'saveItem', errorMsg);
         return;
       }
 
@@ -64,6 +68,8 @@ export default Ember.Component.extend({
         saveOption = Ember.String.capitalize(lowerCaseOption);
 
       this.set('isSaving', true);
+
+      this.get('analytics').captureEvent('buttonClick', 'saveItem', Ember.String.singularize(this.get('optionType').toLowerCase()));
 
       this.get('user')[`saveFav${saveOption}`](this.get('optionValueList')).then(() => {
         if (this.get('redirect')) {
@@ -80,6 +86,7 @@ export default Ember.Component.extend({
           errorMsg = error.jqXHR.responseJSON.message;
         }
         toastr.error(errorMsg);
+        this.get('analytics').captureEvent('error', 'saveItem', errorMsg);
       }).finally(() => {
         this.set('isSaving', false);
       });
@@ -90,7 +97,9 @@ export default Ember.Component.extend({
 
       if (keyCode === 13) {
         if (this.get('optionValueList.length') === this.get('optionValueMaxLimit')) {
-          toastr.error(`You can only add upto ${this.get('optionValueMaxLimit')} ${this.get('optionType').toLowerCase()}`);
+          var errorMsg = `You can only add upto ${this.get('optionValueMaxLimit')} ${this.get('optionType').toLowerCase()}`;
+          toastr.error(errorMsg);
+          this.get('analytics').captureEvent('error', 'addItem', errorMsg);
           return;
         }
 
@@ -109,13 +118,18 @@ export default Ember.Component.extend({
           });
           if (isUsernameAlreadyPresent.length > 0) {
             this.set('isAdding', false);
-            toastr.error('User is already in list');
+            var errorMsg = 'User is already in list';
+            toastr.error(errorMsg);
+            this.get('analytics').captureEvent('error', 'addItem', errorMsg);
             return;
           }
+          this.get('analytics').captureEvent('buttonClick', 'addItem', 'user');
           this.get('user').checkUsernameValidity(value).then((response) => {
             this.get('optionValueList').pushObject(response.user);
           }, () => {
-            toastr.error('This is not a valid twitter account');
+            var errorMsg = 'This is not a valid twitter account';
+            toastr.error(errorMsg);
+            this.get('analytics').captureEvent('error', 'addItem', errorMsg);
           }).finally(() => {
             this.setProperties({
               'value': '',
@@ -131,9 +145,12 @@ export default Ember.Component.extend({
           });
           if (isKeywordAlreadyPresent.length > 0) {
             this.set('isAdding', false);
-            toastr.error('Keyword is already in list');
+            var errorMsg = 'Keyword is already in list';
+            toastr.error(errorMsg);
+            this.get('analytics').captureEvent('error', 'addItem', errorMsg);
             return;
           }
+          this.get('analytics').captureEvent('buttonClick', 'addItem', 'keyword');
           this.get('optionValueList').pushObject({
             keyword: value
           });
@@ -155,6 +172,8 @@ export default Ember.Component.extend({
       }
     },
     removeFavItem(value) {
-      this.get('optionValueList').removeObject(value);    }
+      this.get('analytics').captureEvent('buttonClick', 'removeItem', Ember.String.singularize(this.get('optionType').toLowerCase()));
+      this.get('optionValueList').removeObject(value);
+    }
   }
 });

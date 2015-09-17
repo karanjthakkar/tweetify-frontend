@@ -35,8 +35,8 @@
             <span class="black tweet__action__type">Posted on:</span> {{format-time postedTweet.posted_at}}
           {{/if}}
           {{#unless postedTweet.error}}
-            <a class="ui right floated" target="_blank" href="//twitter.com/{{postedTweet.original_tweet_author}}/status/{{postedTweet.posted_tweet_id}}">
-              <span class="tweet__link">
+            <a class="ui right floated" {{action 'viewStatus' postedTweet}} target="_blank" href="//twitter.com/{{postedTweet.original_tweet_author}}/status/{{postedTweet.posted_tweet_id}}">
+              <span class="tweet__link" >
                 View posted status
               </span>
               <i class="external icon"></i>
@@ -59,9 +59,9 @@
           😔
         </div>
         It seems that we could not find engaging content for your account. Try adding different users and keywords.
-        {{#link-to 'app.settings' tagName="div" class="ui primary button help__link"}}
+        <div {{action 'changeKeywordOrUsers' 'app.settings' 'analysedButNotPosted'}} class="ui primary button help__link">
           Change Keywords / Users
-        {{/link-to}}
+        </div>
       </div>
     {{/unless}}
   {{/each}}

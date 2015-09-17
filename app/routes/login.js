@@ -5,19 +5,19 @@ export default Base.extend({
   analytics: Ember.inject.service(),
   actions: {
     footerUsernameClicked() {
-      this.get('analytics').captureEvent('footerUsernameClicked');
+      this.get('analytics').captureEvent('buttonClick', 'footerUsernameClicked');
       window.open('//twitter.com/geekykaran', '_blank');
     },
     footerContactMeClicked() {
-      this.get('analytics').captureEvent('footerContactMeClicked');
+      this.get('analytics').captureEvent('buttonClick', 'footerContactMeClicked');
       window.open('mailto:karan@tweetify.io?subject=I <3 Tweetify', '_blank');
     },
     headerFollowClicked() {
-      this.get('analytics').captureEvent('headerFollowClicked');
+      this.get('analytics').captureEvent('buttonClick', 'headerFollowClicked');
       window.open('//twitter.com/tweetifyio', '_blank');
     },
-    signInViaTwitter() {
-      this.get('analytics').captureEvent('signInButtonClicked');
+    signInViaTwitter(type) {
+      this.get('analytics').captureEvent('buttonClick', 'signInButtonClicked', type);
       if (this.get('session.isAuthenticated')) {
         this.transitionTo('app');
         return; // Already authenticated

@@ -29,7 +29,7 @@
         <div class="extra content">
           <i class="history icon tweet__action__icon"></i>
           <span class="black tweet__action__type">Will be posted on:</span> {{format-time scheduledTweet.scheduled_at}}
-          <a class="ui right floated" target="_blank" href="//twitter.com/{{scheduledTweet.original_tweet_author}}/status/{{scheduledTweet.original_tweet_id}}">
+          <a class="ui right floated" {{action 'viewStatus' scheduledTweet}} target="_blank" href="//twitter.com/{{scheduledTweet.original_tweet_author}}/status/{{scheduledTweet.original_tweet_id}}">
             <span class="tweet__link">
               View original status
             </span>
@@ -47,9 +47,9 @@
               Yay! 🎉
             </div>
             All tweets have been posted.
-            {{#link-to 'app.profile.posted' tagName="div" class="ui primary button help__link"}}
+            <div href='#/app/profile/posted' {{action 'checkThemOut' 'app.profile.posted'}} tagName="div" class="ui primary button help__link">
               Check them out.
-            {{/link-to}}
+            </div>
           </div>
         {{else}}
           <div class="ui center aligned segment no-content">
@@ -57,9 +57,9 @@
               😔
             </div>
             It seems that we could not find engaging content for your account. Try adding different users and keywords.
-            {{#link-to 'app.settings' tagName="div" class="ui primary button help__link"}}
+            <div href='#/app/settings' {{action 'changeKeywordOrUsers' 'app.settings' 'analysedButNotPosted'}} tagName="div" class="ui primary button help__link">
               Change Keywords / Users
-            {{/link-to}}
+            </div>
           </div>
         {{/if}}
       {{else}}
@@ -68,9 +68,9 @@
             😔
           </div>
           It seems that we could not find engaging content for your account. Try adding different users and keywords.
-          {{#link-to 'app.settings' tagName="div" class="ui primary button help__link"}}
+          <div href='#/app/settings' {{action 'changeKeywordOrUsers' 'app.settings' 'notAnalysed'}} tagName="div" class="ui primary button help__link">
             Change Keywords / Users
-          {{/link-to}}
+          </div>
         </div>
       {{/if}}
     {{else}}

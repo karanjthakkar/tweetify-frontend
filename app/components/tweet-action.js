@@ -3,6 +3,7 @@ import Ember from 'ember';
 export default Ember.Component.extend({
 
   user: Ember.inject.service(),
+  analytics: Ember.inject.service(),
   eventBus: Ember.inject.service(),
 
   currentAction: null,
@@ -31,6 +32,7 @@ export default Ember.Component.extend({
   actions: {
     setTweetAction(actionType) {
       this.set('currentAction', actionType);
+      this.get('analytics').captureEvent('buttonClick', 'changeTweetAction', actionType);
     },
     saveTweetAction() {
 
@@ -40,13 +42,15 @@ export default Ember.Component.extend({
 
       this.set('isSaving', true);
 
+      this.get('analytics').captureEvent('buttonClick', 'saveItem', this.get('currentAction'));
+
       this.get('user').saveTweetAction(this.get('currentAction')).then(() => {
         if (this.get('redirect')) {
           this.get('eventBus').publish('onboardComplete:tweet_action');
         } else {
           toastr.success(`Tweet action saved successfully.`);
         }
-      }, () => {
+      }, (error) => {
         var errorMsg = 'Error saving tweet action';
         if (error.jqXHR.status === 0) {
           errorMsg = 'You are offline.'
@@ -55,6 +59,7 @@ export default Ember.Component.extend({
           errorMsg = error.jqXHR.responseJSON.message;
         }
         toastr.error(errorMsg);
+        this.get('analytics').captureEvent('error', 'saveItem', errorMsg);
       }).finally(() => {
         this.set('isSaving', false);
       });
