@@ -166,7 +166,7 @@ export default Ember.Component.extend({
     },
     removeSpace(text, event) {
       var keyCode = event.keyCode || event.which;
-      if (keyCode === 32) {
+      if (this.get('optionType') === 'USERS' && keyCode === 32) {
         event.preventDefault();
         return false;
       }
