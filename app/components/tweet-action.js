@@ -12,14 +12,14 @@ export default Ember.Component.extend({
   isSaving: false,
 
   actionTypes: [{
-    type: 'COPY',
-    labelText: 'Share Same Content'
+    type: 'TEXT_RT',
+    labelText: 'Text Retweet (Recommended)'
   }, {
     type: 'NATIVE_RT',
     labelText: 'Native Retweet'
   }, {
-    type: 'TEXT_RT',
-    labelText: 'Text Retweet'
+    type: 'COPY',
+    labelText: 'Share Same Content'
   }],
 
   setup: Ember.on('init', function() {
