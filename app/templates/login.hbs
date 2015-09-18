@@ -1,4 +1,23 @@
-<div class="top-section dark-bg">
+<div class="top-section">
+  <div class="ui top menu logo__container">
+    <a href="/" class="logo bold">TWEETIFY</a>
+    <a href="//twitter.com/tweetifyio" target="_blank" {{action 'headerFollowClicked'}} class="bold twitter-icon">
+      Follow @tweetifyio
+      <i class="icon large twitter outline button"></i>
+    </a>
+  </div>
+  <div class="center-align maintenance">
+    😔
+    <h1>Tweetify is down for maintenance</h1>
+    <h3>We'll be back before you know it. Meanwhile, follow us on twitter for updates</h3>
+    <a href="https://twitter.com/tweetifyio" target="_blank" class="twitter-follow-button" data-show-count="true">Follow @tweetifyio</a>
+    <script>
+    !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+    </script>
+  </div>
+</div>
+
+{{!-- <div class="top-section dark-bg">
   <div class="ui top menu logo__container">
     <a href="/" class="logo bold">TWEETIFY</a>
     <a href="//twitter.com/tweetifyio" target="_blank" {{action 'headerFollowClicked'}} class="bold twitter-icon">
@@ -109,7 +128,7 @@
     <a href="https://twitter.com/tweetifyio" target="_blank" class="twitter-follow-button" data-show-count="true">Follow @tweetifyio</a>
     <script>
       !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
-      </script>
+    </script>
   </h3>
   <h3>
     Made with
@@ -119,3 +138,4 @@
     Tell me if you like it: <a href="mailto:karanjthakkar@gmail.com?subject=I <3 Tweetify" target="_blank" {{action 'footerContactMeClicked'}}>karanjthakkar@gmail.com</a>
   </h3>
 </div>
+ --}}
