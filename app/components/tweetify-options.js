@@ -77,7 +77,7 @@ export default Ember.Component.extend({
         } else {
           toastr.success(`${Ember.String.capitalize(this.get('optionType').toLowerCase())} saved successfully.`);
         }
-      }, () => {
+      }, (error) => {
         var errorMsg = 'Error saving data';
         if (error.jqXHR.status === 0) {
           errorMsg = 'You are offline.'
