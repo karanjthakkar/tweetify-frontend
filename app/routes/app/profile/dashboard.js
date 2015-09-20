@@ -1,9 +1,9 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
-  title: 'Tweetify | Posted Tweets',
+  title: 'Tweetify | Dashboard',
   user: Ember.inject.service(),
   model() {
-    return this.get('user').getPostedTweets(localStorage.getItem('token'));
+    return this.get('user').getTweets(this.get('user.data.id'));
   }
 });

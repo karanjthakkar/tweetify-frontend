@@ -17,6 +17,13 @@ export default Ember.Service.extend({
     });
   },
 
+  approveTweet(id) {
+    return ajax({
+      url: `${config.apiDomain}/approve/${id}`,
+      type: 'POST'
+    });
+  },
+
   checkUsernameValidity(username) {
     return new Ember.RSVP.Promise(function(resolve, reject) {
       ajax({
@@ -115,17 +122,22 @@ export default Ember.Service.extend({
     });
   },
 
-  getScheduledTweets(id) {
-    return ajax({
-      url: `${config.apiDomain}/scheduled_tweets/${id}`,
-      type: 'GET'
-    });
-  },
-
-  getPostedTweets(id) {
-    return ajax({
-      url: `${config.apiDomain}/posted_tweets/${id}`,
-      type: 'GET'
+  getTweets(id) {
+    NProgress.start();
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      ajax({
+        url: `${config.apiDomain}/tweets/${id}`,
+        type: 'GET'
+      }).then(function(response) {
+        var data = response.map(function(item) {
+          return Ember.Object.create(item);
+        });
+        resolve(data);
+      }, function(response) {
+        reject(response);
+      }).finally(function() {
+        NProgress.done();
+      });
     });
   },
 
