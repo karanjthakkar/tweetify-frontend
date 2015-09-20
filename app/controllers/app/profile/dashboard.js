@@ -4,6 +4,37 @@ export default Ember.Controller.extend({
   user: Ember.inject.service(),
   analytics: Ember.inject.service(),
 
+  queryParams: ['posted', 'scheduled', 'pending'],
+
+  posted: true,
+  scheduled: true,
+  pending: true,
+
+  filterList: Ember.computed.filter('model', function(item) {
+    var posted = this.get('posted'),
+      scheduled = this.get('scheduled'),
+      pending = this.get('pending');
+
+    if (posted && pending && !scheduled) {
+      return item.get('posted') === true || item.get('approved') === false;
+    } else if (posted && !pending && scheduled) {
+      return item.get('approved') === true;
+    } else if (!posted && pending && scheduled) {
+      return item.get('posted') === false;
+    } else if (posted && !pending && !scheduled) {
+      return item.get('posted') === true;
+    } else if (!posted && pending && !scheduled) {
+      return item.get('approved') === false;
+    } else if (!posted && !pending && scheduled) {
+      return item.get('approved') === true && item.get('posted') === false;
+    } else if (!posted && !pending && !scheduled) {
+      return false;
+    } else {
+      return true;
+    }
+
+  }),
+
   isAccountCreatedTimeMoreThanHour: Ember.computed(function() {
     var created = this.get('user.data.created_at'),
       lastCron = this.get('user.data.last_cron_run_time');
@@ -17,6 +48,7 @@ export default Ember.Controller.extend({
       this.get('user').approveTweet(tweet.get('_id')).then((response) => {
         tweet.set('approved', true);
         tweet.set('scheduled_at', response.scheduled_at);
+        this.notifyPropertyChange('model');
       }, (error) => {
         var errorMsg = 'Error approving tweet.';
         if (error.jqXHR.status === 0) {

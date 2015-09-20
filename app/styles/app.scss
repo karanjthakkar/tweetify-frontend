@@ -201,8 +201,17 @@ body {
   left: calc(50% - 30px);
   top: 45px;
 }
-.ui.divided.items .item {
-  padding: 15px!important;
+.ui.divided.items {
+  border-top: 1px solid #D4D4D5;
+  margin: 0;
+  padding: 1.5em 0em;
+  .item {
+    padding: 15px!important;
+  }
+  .item:last-child {
+    border-bottom: 1px solid #D4D4D5;
+    padding-bottom: 15px!important;
+  }
 }
 .user__image {
   background-image: url('/images/empty.png');

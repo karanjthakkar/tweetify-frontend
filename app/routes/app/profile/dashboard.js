@@ -5,5 +5,10 @@ export default Ember.Route.extend({
   user: Ember.inject.service(),
   model() {
     return this.get('user').getTweets(this.get('user.data.id'));
+  },
+  actions: {
+    queryParamsDidChange() {
+      this.controllerFor('app.profile.dashboard').notifyPropertyChange('model');
+    }
   }
 });

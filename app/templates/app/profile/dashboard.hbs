@@ -1,5 +1,27 @@
+<div class="ui form">
+  <div class="inline fields">
+    <div class="field">
+      <div class="ui checkbox">
+        {{input type="checkbox" id="posted" tabindex="0" checked=posted}}
+        <label for="posted">Posted</label>
+      </div>
+    </div>
+    <div class="field">
+      <div class="ui checkbox">
+        {{input type="checkbox" id="scheduled" tabindex="1" checked=scheduled}}
+        <label for="scheduled">Scheduled</label>
+      </div>
+    </div>
+    <div class="field">
+      <div class="ui checkbox">
+        {{input type="checkbox" id="pending" tabindex="2" checked=pending}}
+        <label for="pending">Pending Approval</label>
+      </div>
+    </div>
+  </div>
+</div>
 <div class="ui divided items">
-  {{#each model as |tweet|}}
+  {{#each filterList as |tweet|}}
     <div class="item">
       <div class="content tweet__content">
         <div class="ui stackable grid">
@@ -80,23 +102,27 @@
       </div>
     </div>
   {{else}}
-    {{#unless isAccountCreatedTimeMoreThanHour}}
-      <div class="ui segment no-content">
-        <div class="ui header center aligned bold">
-          Congratulations! Your part is over 🍷
+    {{#if (is-eq model.length 0)}}
+      {{#unless isAccountCreatedTimeMoreThanHour}}
+        <div class="ui segment no-content">
+          <div class="ui header center aligned bold">
+            Congratulations! Your part is over 🍷
+          </div>
+          Now we do the heavy lifting of finding and posting amazing content for you. Come back in an hour to see the awesomeness that we have found.
         </div>
-        Now we do the heavy lifting of finding and posting amazing content for you. Come back in an hour to see the awesomeness that we have found.
-      </div>
+      {{else}}
+        <div class="ui center aligned segment no-content">
+          <div class="ui huge header center aligned bold">
+            😔
+          </div>
+          It seems that we could not find engaging content for your account. Try adding different users and keywords.
+          <div {{action 'changeKeywordOrUsers' 'app.settings' 'analysedButNotPosted'}} class="ui primary button help__link">
+            Change Keywords / Users
+          </div>
+        </div>
+      {{/unless}}
     {{else}}
-      <div class="ui center aligned segment no-content">
-        <div class="ui huge header center aligned bold">
-          😔
-        </div>
-        It seems that we could not find engaging content for your account. Try adding different users and keywords.
-        <div {{action 'changeKeywordOrUsers' 'app.settings' 'analysedButNotPosted'}} class="ui primary button help__link">
-          Change Keywords / Users
-        </div>
-      </div>
-    {{/unless}}
+      Change the filter to view items.
+    {{/if}}
   {{/each}}
 </div>
