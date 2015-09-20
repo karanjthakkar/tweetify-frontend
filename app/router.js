@@ -44,6 +44,7 @@ Router.map(function() {
     }, function() {
       this.route('posted');
       this.route('scheduled');
+      this.route('dashboard');
     });
     this.route('settings');
   });
