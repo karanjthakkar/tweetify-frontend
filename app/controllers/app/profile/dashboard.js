@@ -49,6 +49,16 @@ export default Ember.Controller.extend({
         tweet.set('approved', true);
         tweet.set('scheduled_at', response.scheduled_at);
         this.notifyPropertyChange('model');
+
+        /* Change tweets count in local store*/
+        var scheduled = this.get('user.data.total_tweets_scheduled'),
+          pendingApproval = this.get('user.data.total_tweets_pending_approval');
+
+        this.get('user.data').setProperties({
+          total_tweets_scheduled: ++scheduled,
+          total_tweets_pending_approval: --pendingApproval
+        });
+
       }, (error) => {
         var errorMsg = 'Error approving tweet.';
         if (error.jqXHR.status === 0) {
@@ -67,7 +77,7 @@ export default Ember.Controller.extend({
       this.transitionTo(route);
     },
     viewStatus(tweet, type) {
-      var author = `${type}_tweet_author`,
+      var author = `${type === 'original' ? type + '_' : ''}tweet_author`,
         id = `${type}_tweet_id`;
       this.get('analytics').captureEvent('buttonClick', 'viewStatus', type);
       window.open(`//twitter.com/${tweet[author]}/status/${tweet[id]}`, '_blank');

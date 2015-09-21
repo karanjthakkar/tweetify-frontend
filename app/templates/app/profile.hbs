@@ -37,7 +37,7 @@
               <a class="ui centered header" href="//twitter.com/{{session.currentUser.username}}" target="_blank">@{{session.currentUser.username}}</a>
               <a class="ui centered header" href="//twitter.com/{{session.currentUser.username}}" target="_blank">{{session.currentUser.name}}</a>
             </div>
-            <div class="extra content">
+            <div class="content bold">
               {{tweet-activity class="user__content__stats__activity"}}
             </div>
             <div class="extra content time">
@@ -50,11 +50,19 @@
             <div class="extra content">
               <div class="user__content__stats">
                 <i class="send outline icon"></i>
-                <span class="user__content__stats__type">Total tweets posted</span><span class="user__content__stats__value">{{session.currentUser.total_tweets_posted}}</span>
+                <span class="user__content__stats__type">Tweets posted</span><span class="user__content__stats__value">{{session.currentUser.total_tweets_posted}}</span>
+              </div>
+              <div class="user__content__stats">
+                <i class="clock icon"></i>
+                <span class="user__content__stats__type">Tweets scheduled</span><span class="user__content__stats__value">{{session.currentUser.total_tweets_scheduled}}</span>
+              </div>
+              <div class="user__content__stats">
+                <i class="reply icon"></i>
+                <span class="user__content__stats__type">Tweets pending approval</span><span class="user__content__stats__value">{{session.currentUser.total_tweets_pending_approval}}</span>
               </div>
               <div class="user__content__stats">
                 <i class="unhide icon"></i>
-                <span class="user__content__stats__type">Total tweets analysed</span><span class="user__content__stats__value">{{session.currentUser.total_tweets_analysed}}</span>
+                <span class="user__content__stats__type">Tweets analysed</span><span class="user__content__stats__value">{{session.currentUser.total_tweets_analysed}}</span>
               </div>
               <div class="user__content__stats">
                 <i class="users icon"></i>

@@ -18,6 +18,27 @@
         <label for="pending">Pending Approval</label>
       </div>
     </div>
+    <div class="field default__action">
+      <div class="ui">
+        <label class="bold">
+          Default action:
+          <span class="light">
+            {{#if (is-eq user.data.tweet_action 'TEXT_RT')}}
+              Text retweet
+            {{else}}
+              {{#if (is-eq user.data.tweet_action 'NATIVE_RT')}}
+                Native retweet
+              {{else}}
+                Share same content
+              {{/if}}
+            {{/if}}
+          </span>
+          <span {{action 'changeKeywordOrUsers' 'app.settings' 'header'}} class="tweet__link--nohover change__action light">
+            Change
+          </span>
+        </label>
+      </div>
+    </div>
   </div>
 </div>
 <div class="ui divided items">
@@ -37,7 +58,7 @@
                 <a class="tweet__author__link bold" href="//twitter.com/{{tweet.tweet_author}}">
                   @<span class="tweet__author__username">{{tweet.tweet_author}}</span>
                 </a>
-                <a class="tweet__link tweet__author__tweet__link" {{action 'viewStatus' tweet 'original'}} target="_blank" href="//twitter.com/{{tweet.original_tweet_author}}/status/{{tweet.original_tweet_id}}">
+                <a class="tweet__link tweet__author__tweet__link" {{action 'viewStatus' tweet 'original'}}>
                   {{#if (is-eq tweet.tweet_type 'original')}}
                     posted
                   {{else}}
@@ -61,7 +82,7 @@
                     <span class="bold">
                       <i class="icon checkmark"></i>
                       Posted on:
-                      <a class="tweet__link" {{action 'viewStatus' tweet 'posted'}} target="_blank" href="//twitter.com/{{tweet.original_tweet_author}}/status/{{tweet.posted_tweet_id}}">
+                      <a class="tweet__link" {{action 'viewStatus' tweet 'posted'}}>
                         {{format-time tweet.posted_at}}
                       </a>
                       <i class="external icon"></i>

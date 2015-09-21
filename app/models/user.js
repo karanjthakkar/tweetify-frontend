@@ -13,6 +13,7 @@ export default DS.Model.extend({
   total_tweets_posted: DS.attr(),
   total_tweets_scheduled: DS.attr(),
   total_tweets_analysed: DS.attr(),
+  total_tweets_pending_approval: DS.attr(),
   tweet_action: DS.attr(),
   fav_keywords: DS.attr(),
   fav_users: DS.attr(),
